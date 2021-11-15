@@ -1,6 +1,4 @@
-// Create a function to convert number to number-abbreviated string
-// For eg - 1245 -> 1.2K
-
+// This is a modified script from the original one by aquelemiguel.
 chrome.storage.sync.get('savedApi', ({savedApi}) => {
 (function () {
   const YT_API_KEY = savedApi;
