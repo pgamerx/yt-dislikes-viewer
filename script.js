@@ -9,8 +9,8 @@ chrome.storage.sync.get('savedApi', ({savedApi}) => {
       .then((dislikeNo) => editDislikes(dislikeNo))
       .catch((err) => console.error(err));
   }
- 
-   function numberToAbbreviatedString(number) {
+
+  function numberToAbbreviatedString(number) {
     let result = "";
     let num = number;
     let unit = "";
