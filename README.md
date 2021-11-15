@@ -6,7 +6,7 @@ Currently I don't want to upload it to Chrome web Store because I will have to p
 
 1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) and unzip it.
 2. Navigate to your browser's extensions page. It's `chrome://extensions` for Chrome and `edge://extensions` for Edge and **enable developer mode**.
-3. Click **Load Unpacked** and, in your unzipped folder, select the unzipped directory.
+3. Click **Load Unpacked** and, select the unzipped folder.
 4. Once the extension is added to your browser, click the extension icon and enter your yt v3 Data API key (More info on the popup)
 
 More reference on how to manually install extensions [here](https://developer.chrome.com/docs/extensions/mv3/getstarted/#manifest).
