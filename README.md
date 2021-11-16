@@ -1,5 +1,5 @@
 # Yt-Dislikes-Viewer
-A Chrome/Brave browser extension that allows you to see dislikes on a youtube video after the youtube update
+A browser extension that allows you to see dislikes on a youtube video after the youtube update
 
 ## Important
 Hey there, I have just checked the Youtube's official changelogs and it seems that they will stop providing dislikes in the youtube Data API.
