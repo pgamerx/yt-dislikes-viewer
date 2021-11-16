@@ -12,7 +12,6 @@
    },
     "permissions": [
       "tabs",
-      "notifications",
       "scripting", "webNavigation", "storage"
   ],
   "host_permissions": ["*://*.youtube.com/watch?*"],
