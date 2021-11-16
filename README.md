@@ -1,7 +1,9 @@
 # Yt-Dislikes-Viewer
+
 A Chrome/Brave browser extension that allows you to see dislikes on a youtube video after the youtube update
 
 ## Installation
+
 Currently I don't want to upload it to Chrome web Store because I will have to pay a 5$ fees and there is a high chance google will reject this extension.
 
 1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) and unzip it.
@@ -12,4 +14,5 @@ Currently I don't want to upload it to Chrome web Store because I will have to p
 More reference on how to manually install extensions [here](https://developer.chrome.com/docs/extensions/mv3/getstarted/#manifest).
 
 ## Contribution
+
 I cannot manage this extension on my own, that's why I need your support to keep it up to mark with the latest youtube updates. Feel free to star/fork this repo and work on it
