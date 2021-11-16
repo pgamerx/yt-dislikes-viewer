@@ -1,0 +1,29 @@
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: arial;
+    font-size: 12px;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+a {
+    color: #8ff;
+}
+
+#wptk, #save {
+    border-radius: 5px;
+    background-color: #555;
+    border-style: solid 2px;
+    border-color: #000;
+    color: #fff;
+    padding: 3px;
+}
+
+#spacer {
+    height: 4px;
+}
