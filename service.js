@@ -20,7 +20,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
 
 function executeScript(tabId) {
   chrome.tabs.executeScript({
-    target: { tabId },
-    files: ["script.js"],
+    tabId:  tabId ,
+    file: "script.js",
   });
 }
