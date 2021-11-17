@@ -11,7 +11,6 @@
       "default_title" : "A popup will come"
    },
     "permissions": [
-      "tabs",
       "scripting", "webNavigation", "storage"
   ],
   "host_permissions": ["*://*.youtube.com/watch?*"],
