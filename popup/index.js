@@ -17,7 +17,7 @@ window.open("https://blog.hubspot.com/website/how-to-get-youtube-api-key", '_bla
 
 }
 function discord(){
-window.open("https://u.pgamerx.com/donate", '_blank').focus();
+window.open("https://u.pgamerx.com/discord", '_blank').focus();
 }
 function donate(){
 window.open("https://ko-fi.com/pgamerx", '_blank').focus();
