@@ -63,7 +63,8 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         num = num / 1000;
         unit = "B";
       }
-      result = num.toFixed(1) + unit;
+      result =
+        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;    
       return result;
     }
     async function fetchDislikes(videoId) {
