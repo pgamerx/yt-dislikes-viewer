@@ -12,7 +12,7 @@ That's why I am launching an archiving API that will allow anyone to see dislike
 
 ## Installation 
 ### For Chrome,Edge,Brave,Opera and any Chromium Browser 
-Currently I don't want to upload it to Chrome web Store because I will have to pay a 5$ fees and there is a high chance google will reject this extension.
+I have uploaded the extension on ChromeStore but it's under approval, so you will have to install it manually for the time being.
 
 1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) and unzip it.
 2. Navigate to your browser's extensions page. It's `chrome://extensions` for Chrome and `edge://extensions` for Edge and **enable developer mode**.
