@@ -9,29 +9,32 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       fetch(
         `https://yt-dislikes-viewer-api.websitedesigne1.repl.co/data/get?video_id=${vid}`
       )
-        .then((response) => 
-          response.json())
+        .then((response) => response.json())
         .then((data) => {
-          if(!data || !data[0]) return 010101
-          if(data[0] == "nope") return false
+          if (!data || !data[0]) return 010101;
+          if (data[0] == "nope") return false;
           console.log(data);
           return parseInt(data[0]);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
-        })
+        });
     }
 
     async function put_on_repl(vid, count) {
       const url = `https://yt-dislikes-viewer-api.websitedesigne1.repl.co/data/put?video_id=${vid}&dislike_count=${count}`;
-      fetch(url).then(response => response.json()).then(json => console.log(json));
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => console.log(json));
       console.log(await response.json());
     }
     async function run() {
-      if ((!await fetch_from_repl(video_id)) || (await fetch_from_repl(video_id)) == 010101) {
+      if (
+        !(await fetch_from_repl(video_id)) ||
+        (await fetch_from_repl(video_id)) == 010101
+      ) {
         fetchDislikes(video_id).then(async (dislikeNo) => {
-          if(dislikeNo)
-          console.log(dislikeNo);
+          if (dislikeNo) console.log(dislikeNo);
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -40,7 +43,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           .catch((err) => console.error(err));
       } else {
         const disss = await fetch_from_repl(video_id);
-        console.log(disss + " " + " disss " );
+        console.log(disss + " " + " disss ");
         editDislikes(disss);
         console.log("Fetched from archieve API");
       }
@@ -63,11 +66,12 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         num = num / 1000;
         unit = "B";
       }
-      result = num.toFixed(1) + unit;
+      result =
+        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;
       return result;
     }
     async function fetchDislikes(videoId) {
-      if(!videoId) {
+      if (!videoId) {
         videoID = new URLSearchParams(window.location.search).get("v");
       }
       const endpoint = `${BASE_ENDPOINT}/videos?key=${YT_API_KEY}&id=${videoId}&part=statistics`;
