@@ -18,7 +18,7 @@
   },
     "permissions": [
       "tabs",
-       "webNavigation", "storage"
+       "webNavigation", "storage", "all_urls"
   ],
   "host_permissions": ["*://*.youtube.com/watch?*"],
     "icons": {
