@@ -67,7 +67,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         unit = "B";
       }
       result =
-        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;
+        numStr.length === 3 || numStr.length === 2
+          ? num.toFixed(0) + unit
+          : num.toFixed(1) + unit;
       return result;
     }
     async function fetchDislikes(videoId) {
@@ -86,12 +88,32 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       const selector =
         "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(2) yt-formatted-string";
       const dislikeLabel = document.querySelector(selector);
+      var progress = document.createElement("div");
+      progress.innerHTML = "";
+      let parentNode = document.getElementById("menu-container");
+      progress.setAttribute("class", "style-scope ytd-sentiment-bar-renderer");
+      progress.setAttribute("id", "like-bar");
 
+      parentNode.appendChild(progress);
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
       dislikeLabel.textContent = formattedDislikes;
+      progress.style.maxWidth = "40%";
+      progress.style.Width = `${formattedDislikes}%`;
     }
 
+    // removes the like bar each time the url changes otherwise duplicates.
+    chrome.runtime.onMessage.addListener(function (
+      request,
+      sender,
+      sendResponse
+    ) {
+      // listen for messages sent from background.js
+      if (request.message === "progressBar") {
+        let progressBar = document.getElementById("like-bar");
+        progressBar.parentElement.removeChild(progressBar);
+      }
+    });
     run();
   })();
 });
