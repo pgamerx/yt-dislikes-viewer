@@ -39,13 +39,13 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
         console
-          .log("Putting on Archieve API")
+          .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
-        console.log("Fetched from archieve API");
+        console.log("Fetched from archive API");
       }
     }
 
