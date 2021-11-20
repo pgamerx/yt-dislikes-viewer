@@ -1,7 +1,7 @@
 {
     "name": "YT Dislikes viewer",
     "description": "Show the dislike count on YouTube videos.",
-    "version": "1.5",
+    "version": "1.6.1",
     "manifest_version": 2,
     "background": {
       "scripts": ["service.js"]
@@ -18,7 +18,7 @@
   },
     "permissions": [
       "tabs",
-       "webNavigation", "storage", "all_urls"
+       "webNavigation", "storage", "all_urls", "*://*.youtube.com/watch?*"
   ],
   "host_permissions": ["*://*.youtube.com/watch?*"],
     "icons": {
