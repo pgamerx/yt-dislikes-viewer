@@ -45,7 +45,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
-        console.log("Fetched from archive API");
+        console.log("Fetched from the archive API");
       }
     }
 
