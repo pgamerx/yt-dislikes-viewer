@@ -92,6 +92,37 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       dislikeLabel.textContent = formattedDislikes;
     }
 
+    function addBar(likePercentage) {
+      const selector = document.querySelector(
+        "div#menu.style-scope.ytd-video-primary-info-renderer"
+      );
+
+      const prgroess = document.querySelector(".progress");
+
+      if (prgroess) {
+        return;
+      }
+
+      const progress = document.createElement("div");
+      const color = document.createElement("div");
+
+      progress.className = "progress";
+      progress.style.position = "relative";
+      progress.style.height = "3px";
+      progress.style.width = "40%";
+      progress.style.background = "#CDCDCD";
+
+      color.className = "color";
+      color.style.position = "absolute";
+      color.style.background = "#065FD4";
+      color.style.width = `${likePercentage}%`;
+      color.style.height = "3px";
+
+      progress.appendChild(color);
+
+      selector.appendChild(progress);
+    }
+
     run();
   })();
 });
