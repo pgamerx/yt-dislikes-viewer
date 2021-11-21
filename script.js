@@ -35,17 +35,26 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       ) {
         fetchDislikes(video_id).then(async (dislikeNo) => {
           if (dislikeNo) console.log(dislikeNo);
+          const like_amount = getLikes();
+          const percentage_like = likePercentage(
+            parseInt(like_amount),
+            parseInt(Math.round(dislikeNo))
+          );
+          addBar(percentage_like);
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
         console
-          .log("Putting on Archieve API")
+          .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
+        const like_amount = getLikes();
+        const percentage_like = likePercentage(parseInt(like_amount));
+        addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
-        console.log("Fetched from archieve API");
+        console.log("Fetched from the archive API");
       }
     }
 
@@ -67,14 +76,12 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         unit = "B";
       }
       result =
-        numStr.length === 3 || numStr.length === 2
-          ? num.toFixed(0) + unit
-          : num.toFixed(1) + unit;
+        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;
       return result;
     }
     async function fetchDislikes(videoId) {
       if (!videoId) {
-        videoID = new URLSearchParams(window.location.search).get("v");
+        videoId = new URLSearchParams(window.location.search).get("v");
       }
       const endpoint = `${BASE_ENDPOINT}/videos?key=${YT_API_KEY}&id=${videoId}&part=statistics`;
 
@@ -88,32 +95,55 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       const selector =
         "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(2) yt-formatted-string";
       const dislikeLabel = document.querySelector(selector);
-      var progress = document.createElement("div");
-      progress.innerHTML = "";
-      let parentNode = document.getElementById("menu-container");
-      progress.setAttribute("class", "style-scope ytd-sentiment-bar-renderer");
-      progress.setAttribute("id", "like-bar");
 
-      parentNode.appendChild(progress);
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
       dislikeLabel.textContent = formattedDislikes;
-      progress.style.maxWidth = "40%";
-      progress.style.Width = `${formattedDislikes}%`;
     }
 
-    // removes the like bar each time the url changes otherwise duplicates.
-    chrome.runtime.onMessage.addListener(function (
-      request,
-      sender,
-      sendResponse
-    ) {
-      // listen for messages sent from background.js
-      if (request.message === "progressBar") {
-        let progressBar = document.getElementById("like-bar");
-        progressBar.parentElement.removeChild(progressBar);
+    function getLikes() {
+      const count = document
+        .querySelector(
+          "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
+        )
+        .ariaLabel.replace(/[^\d-]/g, "");
+      return parseInt(count);
+    }
+
+    function likePercentage(likeCount, dislikeCount) {
+      return (100 * likeCount) / (likeCount + dislikeCount);
+    }
+
+    function addBar(likePercentage) {
+      const selector = document.querySelector(
+        "div#menu.style-scope.ytd-video-primary-info-renderer"
+      );
+
+      const prgroess = document.querySelector(".progress");
+
+      if (prgroess) {
+        return;
       }
-    });
+
+      const progress = document.createElement("div");
+      const color = document.createElement("div");
+
+      progress.className = "progress";
+      progress.style.position = "relative";
+      progress.style.height = "3px";
+      progress.style.width = "40%";
+      progress.style.background = "#CDCDCD";
+
+      color.className = "color";
+      color.style.position = "absolute";
+      color.style.background = "#065FD4";
+      color.style.width = `${likePercentage}%`;
+      color.style.height = "3px";
+
+      progress.appendChild(color);
+
+      selector.appendChild(progress);
+    }
+
     run();
-  })();
-});
+  })()})
