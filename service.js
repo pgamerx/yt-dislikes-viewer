@@ -8,18 +8,18 @@ async function getVideoId(url) {
   return false;
 }
 
-chrome.webNavigation.onCompleted.addListener((details) => {
+browser.webNavigation.onCompleted.addListener((details) => {
   if (!getVideoId(details.url)) return;
   executeScript(details.tabId);
 });
 
-chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
+browser.webNavigation.onHistoryStateUpdated.addListener((details) => {
   if (!getVideoId(details.url)) return;
   executeScript(details.tabId);
 });
 
 function executeScript(tabId) {
-  chrome.tabs.executeScript(parseInt(tabId),{
+  browser.tabs.executeScript(parseInt(tabId),{
     file: "script.js",
   });
 }

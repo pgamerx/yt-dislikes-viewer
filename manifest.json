@@ -16,9 +16,11 @@
     "default_title": "Home Page",
     "default_popup": "popup/index.html"
   },
-    "permissions": [
-      "tabs",
-       "webNavigation", "storage", "all_urls", "*://*.youtube.com/watch?*"
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "*://*.youtube.com/*",
+    "*://*.googleapis.com/youtube/v3/*"
   ],
   "host_permissions": ["*://*.youtube.com/watch?*"],
     "icons": {
