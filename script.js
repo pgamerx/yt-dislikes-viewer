@@ -35,17 +35,26 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       ) {
         fetchDislikes(video_id).then(async (dislikeNo) => {
           if (dislikeNo) console.log(dislikeNo);
+          const like_amount = getLikes();
+          const percentage_like = likePercentage(
+            parseInt(like_amount),
+            parseInt(Math.round(dislikeNo))
+          );
+          addBar(percentage_like);
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
         console
-          .log("Putting on Archieve API")
+          .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
+        const like_amount = getLikes();
+        const percentage_like = likePercentage(parseInt(like_amount));
+        addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
-        console.log("Fetched from archieve API");
+        console.log("Fetched from the archive API");
       }
     }
 
@@ -72,7 +81,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
     async function fetchDislikes(videoId) {
       if (!videoId) {
-        videoID = new URLSearchParams(window.location.search).get("v");
+        videoId = new URLSearchParams(window.location.search).get("v");
       }
       const endpoint = `${BASE_ENDPOINT}/videos?key=${YT_API_KEY}&id=${videoId}&part=statistics`;
 
@@ -90,6 +99,19 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
       dislikeLabel.textContent = formattedDislikes;
+    }
+
+    function getLikes() {
+      const count = document
+        .querySelector(
+          "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
+        )
+        .ariaLabel.replace(/[^\d-]/g, "");
+      return parseInt(count);
+    }
+
+    function likePercentage(likeCount, dislikeCount) {
+      return (100 * likeCount) / (likeCount + dislikeCount);
     }
 
     function addBar(likePercentage) {
