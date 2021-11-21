@@ -1,24 +1,21 @@
 {
-    "name": "YT Dislikes viewer",
-    "description": "Show the dislike count on YouTube videos.",
-    "version": "1.6.5",
-    "manifest_version": 3,
-    "background": {
-      "service_worker": "service.js"
-    },
-    "action" : {
-      "default_popup" : "popup/index.html",
-      "default_title" : "A popup will come"
-   },
-    "permissions": [
-      "scripting", "webNavigation", "storage"
-  ],
+  "name": "YT Dislikes viewer",
+  "description": "Show the dislike count on YouTube videos.",
+  "version": "1.6.5",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "service.js"
+  },
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "A popup will come"
+  },
+  "permissions": ["scripting", "webNavigation", "storage", "tabs"],
   "host_permissions": ["*://*.youtube.com/watch?*"],
-    "icons": {
-      "16": "/icons/get_started16.png",
-      "32": "/icons/get_started32.png",
-      "48": "/icons/get_started48.png",
-      "128": "/icons/get_started128.png"
-    }
+  "icons": {
+    "16": "/icons/get_started16.png",
+    "32": "/icons/get_started32.png",
+    "48": "/icons/get_started48.png",
+    "128": "/icons/get_started128.png"
   }
-  
+}
