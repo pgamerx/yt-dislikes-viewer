@@ -1,4 +1,4 @@
-// This is a highly modified script from the original one by aquelemiguel.
+// This is a modified script from the original one by aquelemiguel.
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
   (function () {
     const YT_API_KEY = savedApi;
@@ -20,20 +20,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           console.log(error);
         });
     }
-    async function AbbreviatedStringToNumber(count_in_string){
-      const string = count_in_string.toLowerCase()
-      if(string.endsWith("k")){
-      const str = string.slice(0, -1)
-      return parseFloat(str) * 1000
-      }else if(string.endsWith("m")){
-      const str = string.slice(0, -1); 
-      return parseFloat(str) * 1000000;
-      }
-      else{
-        const result = parseFloat(string)
-        return result
-      }
-    }
 
     async function put_on_repl(vid, count) {
       const url = `https://yt-dislikes-viewer-api.websitedesigne1.repl.co/data/put?video_id=${vid}&dislike_count=${count}`;
@@ -49,10 +35,12 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       ) {
         fetchDislikes(video_id).then(async (dislikeNo) => {
           if (dislikeNo) console.log(dislikeNo);
-         const like_amoun = getLikes()
-         const like_amount = AbbreviatedStringToNumber(like_amoun.toString)
-         const percentage_like = likePercentage(parseInt(like_amount))
-          addBar(percentage_like)
+          const like_amount = getLikes();
+          const percentage_like = likePercentage(
+            parseInt(like_amount),
+            parseInt(Math.round(dislikeNo))
+          );
+          addBar(percentage_like);
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -60,10 +48,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
-        const like_amoun = getLikes()
-        const like_amount = AbbreviatedStringToNumber(like_amoun.toString())
-        const percentage_like = likePercentage(parseInt(like_amount))
-         addBar(percentage_like)
+        const like_amount = getLikes();
+        const percentage_like = likePercentage(parseInt(like_amount));
+        addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
@@ -94,7 +81,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
     async function fetchDislikes(videoId) {
       if (!videoId) {
-        videoID = new URLSearchParams(window.location.search).get("v");
+        videoId = new URLSearchParams(window.location.search).get("v");
       }
       const endpoint = `${BASE_ENDPOINT}/videos?key=${YT_API_KEY}&id=${videoId}&part=statistics`;
 
@@ -114,16 +101,17 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       dislikeLabel.textContent = formattedDislikes;
     }
 
-    function getLikes(){
-      const count = document.querySelector("ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string").innerText;
-     return parseInt(count)
-     }
+    function getLikes() {
+      const count = document
+        .querySelector(
+          "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
+        )
+        .ariaLabel.replace(/[^\d-]/g, "");
+      return parseInt(count);
+    }
 
-    function likePercentage(likeCount, dislikeCount){
-      const first_step = dislikeCount/likeCount
-      const percentage = first_step*100
-      const result = 100-parseInt(percentage)
-      return parseInt(result)
+    function likePercentage(likeCount, dislikeCount) {
+      return (100 * likeCount) / (likeCount + dislikeCount);
     }
 
     function addBar(likePercentage) {
@@ -158,5 +146,4 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     run();
-  })();
-});
+  })()})
