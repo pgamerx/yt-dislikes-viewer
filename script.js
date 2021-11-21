@@ -76,7 +76,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         unit = "B";
       }
       result =
-        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;
+        numStr.length === 3 || numStr === 2 || numStr.length === 1
+          ? num.toFixed(0) + unit
+          : num.toFixed(1) + unit;
       return result;
     }
     async function fetchDislikes(videoId) {
@@ -115,15 +117,23 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     function addBar(likePercentage) {
-      const selector = document.querySelector(
-        "div#menu.style-scope.ytd-video-primary-info-renderer"
-      );
+      // let progress = document.createElement("div");
+      // let parentNode = document.getElementById("menu-container");
+      // progress.setAttribute("class", "style-scope ytd-sentiment-bar-renderer");
+      // progress.setAttribute("id", "like-bar");
+
+      // parentNode.appendChild(progress);
+      //   const selector = document.querySelector(
+      //     "div#menu.style-scope.ytd-video-primary-info-renderer"
+      //   );
+
+      const selector = document.getElementById("menu-container");
 
       const prgroess = document.querySelector(".progress");
 
-      if (prgroess) {
-        return;
-      }
+      // if (prgroess) {
+      //   return;
+      // }
 
       const progress = document.createElement("div");
       const color = document.createElement("div");
@@ -133,17 +143,31 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       progress.style.height = "3px";
       progress.style.width = "40%";
       progress.style.background = "#CDCDCD";
-
+      progress.style.marginright = "20px";
+      progress.setAttribute("id", "test");
       color.className = "color";
       color.style.position = "absolute";
       color.style.background = "#065FD4";
       color.style.width = `${likePercentage}%`;
       color.style.height = "3px";
+      color.setAttribute("id", "color");
 
       progress.appendChild(color);
 
       selector.appendChild(progress);
     }
 
+    chrome.runtime.onMessage.addListener(function (
+      request,
+      sender,
+      sendResponse
+    ) {
+      // listen for messages sent from background.js
+      if (request.message === "progressbar") {
+        let progressBar = document.querySelector(".progress");
+        progressBar.parentElement.removeChild(progressBar);
+      }
+    });
     run();
-  })()})
+  })();
+});
