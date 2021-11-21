@@ -1,7 +1,16 @@
 // This is a modified script from the original one by aquelemiguel.
-chrome.storage.sync.get("savedApi", ({ savedApi }) => {
+const youtubeRegex =
+  /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+async function getVideoId(url) {
+  const match = url.match(youtubeRegex);
+  if (match && match[1]) {
+    return match[1];
+  }
+  return false;
+}
+browser.storage.local.get("apiKey", ({ apiKey }) => {
   (function () {
-    const YT_API_KEY = savedApi;
+    const YT_API_KEY = apiKey;
     const BASE_ENDPOINT = "https://www.googleapis.com/youtube/v3";
 
     const video_id = new URLSearchParams(window.location.search).get("v");
@@ -21,6 +30,16 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         });
     }
 
+    const youtubeRegex =
+  /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+async function getVideoId(url) {
+  const match = url.match(youtubeRegex);
+  if (match && match[1]) {
+    return match[1];
+  }
+  return false;
+}
+
     async function put_on_repl(vid, count) {
       const url = `https://yt-dislikes-viewer-api.websitedesigne1.repl.co/data/put?video_id=${vid}&dislike_count=${count}`;
       fetch(url)
@@ -29,6 +48,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       console.log(await response.json());
     }
     async function run() {
+      if(!youtubeRegex(window.location.href)) return;
       if (
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == 010101

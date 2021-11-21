@@ -15,9 +15,9 @@ function save_options(e) {
     var status = document.getElementsByClassName("status")[0];
     status.textContent = "Option saved.";
     status.style.color = "#1eff00";
-    chrome.storage.sync.set(
+    browser.storage.local.set(
       {
-        savedApi: api,
+        apiKey: api,
       },
       function () {
         // Update status to let user know options were saved.
