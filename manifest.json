@@ -10,7 +10,7 @@
     "default_popup": "popup/index.html",
     "default_title": "A popup will come"
   },
-  "permissions": ["scripting", "webNavigation", "storage", "tabs"],
+  "permissions": ["scripting", "webNavigation", "storage"],
   "host_permissions": ["*://*.youtube.com/watch?*"],
   "icons": {
     "16": "/icons/get_started16.png",

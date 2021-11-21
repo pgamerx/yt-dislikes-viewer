@@ -148,5 +148,4 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     run();
-  })();
-});
+  })()})
