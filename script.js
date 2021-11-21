@@ -76,7 +76,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         unit = "B";
       }
       result =
-        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;
+        numStr.length === 3 || numStr === 2 || numStr.length === 1
+          ? num.toFixed(0) + unit
+          : num.toFixed(1) + unit;
       return result;
     }
     async function fetchDislikes(videoId) {
@@ -146,4 +148,5 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     run();
-  })()})
+  })();
+});
