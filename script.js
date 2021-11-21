@@ -1,4 +1,4 @@
-// This is a modified script from the original one by aquelemiguel.
+// This is a highly modified script from the original one by aquelemiguel.
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
   (function () {
     const YT_API_KEY = savedApi;
@@ -20,6 +20,20 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           console.log(error);
         });
     }
+    async function AbbreviatedStringToNumber(count_in_string){
+      const string = count_in_string.toLowerCase()
+      if(string.endsWith("k")){
+      const str = string.slice(0, -1)
+      return parseFloat(str) * 1000
+      }else if(string.endsWith("m")){
+      const str = string.slice(0, -1); 
+      return parseFloat(str) * 1000000;
+      }
+      else{
+        const result = parseFloat(string)
+        return result
+      }
+    }
 
     async function put_on_repl(vid, count) {
       const url = `https://yt-dislikes-viewer-api.websitedesigne1.repl.co/data/put?video_id=${vid}&dislike_count=${count}`;
@@ -35,7 +49,8 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       ) {
         fetchDislikes(video_id).then(async (dislikeNo) => {
           if (dislikeNo) console.log(dislikeNo);
-         const like_amount = getLikes()
+         const like_amoun = getLikes()
+         const like_amount = AbbreviatedStringToNumber(like_amoun.toString)
          const percentage_like = likePercentage(parseInt(like_amount))
           addBar(percentage_like)
           editDislikes(dislikeNo);
@@ -45,13 +60,14 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
-        const like_amount = getLikes()
+        const like_amoun = getLikes()
+        const like_amount = AbbreviatedStringToNumber(like_amoun.toString())
         const percentage_like = likePercentage(parseInt(like_amount))
          addBar(percentage_like)
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
-        console.log("Fetched from Archive API");
+        console.log("Fetched from the archive API");
       }
     }
 
