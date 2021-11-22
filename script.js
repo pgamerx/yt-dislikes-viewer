@@ -121,6 +121,10 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
       const prgroess = document.querySelector(".progress");
 
+      const clipButton = document.querySelectorAll(
+        "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      );
+
       if (prgroess) {
         return;
       }
@@ -136,9 +140,17 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
       color.className = "color";
       color.style.position = "absolute";
-      color.style.background = "#065FD4";
+      color.style.background = "#CC0000";
       color.style.width = `${likePercentage}%`;
       color.style.height = "3px";
+
+      if (clipButton) {
+        clipButton.forEach((data) => {
+          if (data.textContent === "Clip") {
+            progress.style.width = "32.5%";
+          }
+        });
+      }
 
       progress.appendChild(color);
 
