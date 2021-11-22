@@ -41,7 +41,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
             parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
-
+          
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -132,6 +132,10 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
       const prgroess = document.getElementById("custom-progress");
 
+      const clipButton = document.querySelectorAll(
+        "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      );
+
       if (prgroess) {
         return;
       }
@@ -148,10 +152,18 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       progress.setAttribute("id", "custom-progress");
       color.className = "color";
       color.style.position = "absolute";
-      color.style.background = "#065FD4";
+      color.style.background = "#CC0000";
       color.style.width = `${likePercentage}%`;
       color.style.height = "3px";
       color.setAttribute("id", "color");
+
+      if (clipButton) {
+        clipButton.forEach((data) => {
+          if (data.textContent === "Clip") {
+            progress.style.width = "32.5%";
+          }
+        });
+      }
 
       progress.appendChild(color);
 
