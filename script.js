@@ -41,6 +41,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
             parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
+
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -76,7 +77,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         unit = "B";
       }
       result =
-        numStr.length === 3 || numStr === 2 || numStr.length === 1
+        numStr.length <= 3 && unit === ""
           ? num.toFixed(0) + unit
           : num.toFixed(1) + unit;
       return result;
@@ -129,11 +130,11 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
       const selector = document.getElementById("menu-container");
 
-      const prgroess = document.querySelector(".progress");
+      const prgroess = document.getElementById("custom-progress");
 
-      // if (prgroess) {
-      //   return;
-      // }
+      if (prgroess) {
+        return;
+      }
 
       const progress = document.createElement("div");
       const color = document.createElement("div");
@@ -142,9 +143,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       progress.style.position = "relative";
       progress.style.height = "3px";
       progress.style.width = "40%";
-      progress.style.background = "#CDCDCD";
+      progress.style.background = "rgb(171 17 17)";
       progress.style.marginright = "20px";
-      progress.setAttribute("id", "test");
+      progress.setAttribute("id", "custom-progress");
       color.className = "color";
       color.style.position = "absolute";
       color.style.background = "#065FD4";
