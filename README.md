@@ -3,8 +3,12 @@ A browser extension that allows you to see dislikes on a youtube video after the
 
 
 [![Discord](https://img.shields.io/discord/690557545965813770?color=blue&label=Discord%20Server&logo=Discord&logoColor=white&style=for-the-badge)](https://u.pgamerx.com/discord) 
+
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/pgamerx/yt-dislikes-viewer?color=red&label=Chromium%20Release&logo=google&logoColor=red&style=for-the-badge)](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest)
+
 [![Mozilla Add-on](https://img.shields.io/amo/v/yt-dislikes-viewer?color=orange&label=Mozilla%20Release&logo=firefox&style=for-the-badge)](https://addons.mozilla.org/addon/yt-dislikes-viewer/)
+
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ekabjflbgeakdkhdneeakapgboleidee?color=red&label=ChromeStore%20Release&logo=google&logoColor=red&style=for-the-badge)](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee)
 
 ## Important
 Hey there, I have just checked the Youtube's official change-logs and it seems that they will stop providing dislikes in the youtube Data API.

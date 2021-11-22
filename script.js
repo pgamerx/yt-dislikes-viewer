@@ -41,6 +41,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
             parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
+          
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -76,7 +77,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         unit = "B";
       }
       result =
-        numStr.length == 3 ? num.toFixed(0) + unit : num.toFixed(1) + unit;
+        numStr.length <= 3 && unit === ""
+          ? num.toFixed(0) + unit
+          : num.toFixed(1) + unit;
       return result;
     }
     async function fetchDislikes(videoId) {
@@ -115,11 +118,19 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     function addBar(likePercentage) {
-      const selector = document.querySelector(
-        "div#menu.style-scope.ytd-video-primary-info-renderer"
-      );
+      // let progress = document.createElement("div");
+      // let parentNode = document.getElementById("menu-container");
+      // progress.setAttribute("class", "style-scope ytd-sentiment-bar-renderer");
+      // progress.setAttribute("id", "like-bar");
 
-      const prgroess = document.querySelector(".progress");
+      // parentNode.appendChild(progress);
+      //   const selector = document.querySelector(
+      //     "div#menu.style-scope.ytd-video-primary-info-renderer"
+      //   );
+
+      const selector = document.getElementById("menu-container");
+
+      const prgroess = document.getElementById("custom-progress");
 
       const clipButton = document.querySelectorAll(
         "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
@@ -136,13 +147,15 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       progress.style.position = "relative";
       progress.style.height = "3px";
       progress.style.width = "40%";
-      progress.style.background = "#CDCDCD";
-
+      progress.style.background = "rgb(171 17 17)";
+      progress.style.marginright = "20px";
+      progress.setAttribute("id", "custom-progress");
       color.className = "color";
       color.style.position = "absolute";
       color.style.background = "#CC0000";
       color.style.width = `${likePercentage}%`;
       color.style.height = "3px";
+      color.setAttribute("id", "color");
 
       if (clipButton) {
         clipButton.forEach((data) => {
@@ -157,6 +170,17 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       selector.appendChild(progress);
     }
 
+    chrome.runtime.onMessage.addListener(function (
+      request,
+      sender,
+      sendResponse
+    ) {
+      // listen for messages sent from background.js
+      if (request.message === "progressbar") {
+        let progressBar = document.querySelector(".progress");
+        progressBar.parentElement.removeChild(progressBar);
+      }
+    });
     run();
   })();
 });
