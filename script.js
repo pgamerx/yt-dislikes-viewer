@@ -41,7 +41,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
             parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
-          
+
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -136,6 +136,10 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
       );
 
+      const thanksButton = document.querySelectorAll(
+        "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      );
+
       if (prgroess) {
         return;
       }
@@ -157,11 +161,20 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       color.style.height = "3px";
       color.setAttribute("id", "color");
 
-      if (clipButton) {
+      // example video https://www.youtube.com/watch?v=J07l-Qe9xgs
+      if (clipButton || thanksButton) {
+        thanksButton.forEach((data) => {
+          if (data.textContent === "Thanks") progress.style.width = "32.5%";
+        });
         clipButton.forEach((data) => {
           if (data.textContent === "Clip") {
             progress.style.width = "32.5%";
           }
+        });
+      }
+      if (clipButton && thanksButton) {
+        thanksButton.forEach((data) => {
+          if (data.textContent === "Thanks") progress.style.width = "25.5%";
         });
       }
 
