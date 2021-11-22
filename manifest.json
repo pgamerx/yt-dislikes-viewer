@@ -6,6 +6,12 @@
     "background": {
       "scripts": ["service.js"]
     },
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "admin@pgamerx.com",
+        "strict_min_version": "42.0"
+      }
+    },
    "browser_action": {
     "default_icon": {
       "16": "/icons/get_started16.png",
