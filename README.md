@@ -30,7 +30,7 @@ More reference on how to manually install extensions [here](https://developer.ch
 1. Head over to Mozilla Add-on Store and navigate to [This extension](https://addons.mozilla.org/addon/yt-dislikes-viewer/).
 2. Install it by clicking "Add Add-on" button.
 
-* ### Manually (Through Gitub Releases)
+* ### Manually (Through Github Releases)
 This is not recommended as it's much difficult to add a extension manually to Mozilla Firefox, but if you do decide to do it then the steps are similar to that of Chromium-based browser
 ## Contribution
 I cannot manage this extension on my own, that's why I need your support to keep it up to mark with the latest youtube updates. Feel free to star/fork this repo and work on it

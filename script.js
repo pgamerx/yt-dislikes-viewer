@@ -143,12 +143,12 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       progress.style.position = "relative";
       progress.style.height = "3px";
       progress.style.width = "40%";
-      progress.style.background = "rgb(171 17 17)";
+      progress.style.background = "gray";
       progress.style.marginright = "20px";
       progress.setAttribute("id", "custom-progress");
       color.className = "color";
       color.style.position = "absolute";
-      color.style.background = "#CC0000";
+      color.style.background = "white";
       color.style.width = `${likePercentage}%`;
       color.style.height = "3px";
       color.setAttribute("id", "color");
