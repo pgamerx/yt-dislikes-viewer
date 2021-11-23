@@ -33,87 +33,31 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == 010101
       ) {
-     const dislikeNo = await fetchDislikes(video_id);
-     console.log(dislikeNo)
-          console.log(dislikeNo)
+        fetchDislikes(video_id).then(async (dislikeNo) => {
+          if (dislikeNo) console.log(dislikeNo);
           const like_amount = getLikes();
           const percentage_like = likePercentage(
-            AbbreviatedStringToNumber(like_amount),
-            parseInt(dislikeNo)
+            parseInt(like_amount),
+            parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
+
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
-
-          console
+        });
+        console
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
         const like_amount = getLikes();
-        const disss = await fetch_from_repl(video_id);
-        console.log(disss);
-        const percentage_like = likePercentage(AbbreviatedStringToNumber(like_amount), parseInt(disss));
-        console.log(like_amount)
-        console.log(percentage_like)
+        const percentage_like = likePercentage(parseInt(like_amount));
         addBar(percentage_like);
+        const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
         console.log("Fetched from the archive API");
       }
     }
-
-function AbbreviatedStringToNumber(string){
-    // Create a function that will convet abbrivated string to number
-    // for eg- "1k" to 1000
-    // "1m" to 1000000
-    // "1b" to 1000000000
-    // "1t" to 1000000000000
-    // "1.1k" to 1100
-    // "1.1m" to 1100000
-
-    // Create a regex to match the abbrivated string
-    const regex = /(\d+)([kmbt])/;
-    // Check if the string matches the regex
-    if(regex.test(string)){
-        // Get the match
-        const match = string.match(regex);
-        // Get the number
-        const number = parseFloat(string.slice(0, -1))
-        console.log(match)
-        // Get the abbrivated string
-        const abbrivated = match[2];
-        // Return the number
-        return number * abbrivatedToNumber(abbrivated);
-    }
-    // If the string doesn't match the regex, return the string as a number
-    return Number(string);  // Convert the string to a number
-}
-function abbrivatedToNumber(abbrivated){
-    // Create a function that will convert abbrivated string to number
-    // for eg- "k" to 1000
-    // "m" to 1000000
-    // "b" to 1000000000
-
-    // Check if the abbrivated string is "k"
-    if(abbrivated === "k"){
-        // Return 1000
-        return 1000;
-    }
-    // Check if the abbrivated string is "m"
-    if(abbrivated === "m"){
-        // Return 1000000
-        return 1000000;
-    }
-    // Check if the abbrivated string is "b"
-    if(abbrivated === "b"){
-        // Return 1000000000
-        return 1000000000;
-    }
-    else{
-        // Return 1
-        return 1;
-    }
-  }
 
     function numberToAbbreviatedString(number) {
       let result = "";
@@ -146,9 +90,7 @@ function abbrivatedToNumber(abbrivated){
 
       return fetch(endpoint)
         .then((r) => r.json())
-        .then((r) => {
-          console.log(r)
-          parseInt(r.items[0].statistics.dislikeCount)});
+        .then((r) => parseInt(r.items[0].statistics.dislikeCount));
     }
 
     function editDislikes(dislikeNo) {
@@ -172,12 +114,10 @@ function abbrivatedToNumber(abbrivated){
     }
 
     function likePercentage(likeCount, dislikeCount) {
-      return parseInt((100 * likeCount) / (likeCount + dislikeCount))
+      return (100 * likeCount) / (likeCount + dislikeCount);
     }
 
-
     function addBar(likePercentage) {
-      console.log(likePercentage)
       const selector = document.getElementById("menu-container");
 
       const prgroess = document.getElementById("custom-progress");
@@ -203,13 +143,13 @@ function abbrivatedToNumber(abbrivated){
       progress.style.position = "relative";
       progress.style.height = "3px";
       progress.style.width = "40%";
-      progress.style.background = "rgb(171 17 17)";
+      progress.style.background = "gray";
       progress.style.marginright = "20px";
       progress.setAttribute("id", "custom-progress");
       color.className = "color";
       color.style.position = "absolute";
-      color.style.background = "#CC0000";
-      color.style.width = `${parseInt(likePercentage)}%`;
+      color.style.background = "white";
+      color.style.width = `${likePercentage}%`;
       color.style.height = "3px";
       color.setAttribute("id", "color");
 
