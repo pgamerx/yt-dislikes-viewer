@@ -37,27 +37,56 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           if (dislikeNo) console.log(dislikeNo);
           const like_amount = getLikes();
           const percentage_like = likePercentage(
-            parseInt(like_amount),
+            parseInt(AbbreviatedStringToNumber(like_amount)),
             parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
 
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
-        });
-        console
+
+          console
           .log("Putting on Archive API")
+          .log(dislikeNo)
           .catch((err) => console.error(err));
+        });
+        
       } else {
         const like_amount = getLikes();
-        const percentage_like = likePercentage(parseInt(like_amount));
-        addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
+        const percentage_like = likePercentage(parseInt(AbbreviatedStringToNumber(like_amount)), parseInt(disss));
+        addBar(percentage_like);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
         console.log("Fetched from the archive API");
       }
     }
+
+    function AbbreviatedStringToNumber(string){
+    // Create a function that will convet abbrivated string to number
+    // for eg- "1k" to 1000
+    // "1m" to 1000000
+    // "1b" to 1000000000
+    // "1t" to 1000000000000
+    // "1.1k" to 1100
+    // "1.1m" to 1100000
+
+    // Create a regex to match the abbrivated string
+    const regex = /(\d+)([kmbt])/;
+    // Check if the string matches the regex
+    if(regex.test(string)){
+        // If it matches, get the first match
+        const match = string.match(regex);
+        // Get the number
+        const number = match[1];
+        // Get the abbrivated string
+        const abbrivated = match[2];
+        // Return the number multiplied by the abbrivated string
+        return number * abbrivatedToNumber(abbrivated);
+    }
+    // If the string doesn't match the regex, return the string as a number
+    return Number(string);  // Convert the string to a number
+}
 
     function numberToAbbreviatedString(number) {
       let result = "";
@@ -90,7 +119,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
       return fetch(endpoint)
         .then((r) => r.json())
-        .then((r) => parseInt(r.items[0].statistics.dislikeCount));
+        .then((r) => {
+          console.log(r)
+          parseInt(r.items[0].statistics.dislikeCount)});
     }
 
     function editDislikes(dislikeNo) {
@@ -114,10 +145,13 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     function likePercentage(likeCount, dislikeCount) {
-      return (100 * likeCount) / (likeCount + dislikeCount);
+      return parseInt((100 * likeCount) / (likeCount + dislikeCount))
     }
 
+    console.log(likePercentage(100,20))
+
     function addBar(likePercentage) {
+      console.log(likePercentage)
       const selector = document.getElementById("menu-container");
 
       const prgroess = document.getElementById("custom-progress");
@@ -149,7 +183,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       color.className = "color";
       color.style.position = "absolute";
       color.style.background = "#CC0000";
-      color.style.width = `${likePercentage}%`;
+      color.style.width = `${parseInt(likePercentage)}%`;
       color.style.height = "3px";
       color.setAttribute("id", "color");
 
