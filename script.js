@@ -33,28 +33,28 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == 010101
       ) {
-        fetchDislikes(video_id).then(async (dislikeNo) => {
-          if (dislikeNo) console.log(dislikeNo);
+     const dislikeNo = await fetchDislikes(video_id);
+     console.log(dislikeNo)
+          console.log(dislikeNo)
           const like_amount = getLikes();
           const percentage_like = likePercentage(
-            parseInt(AbbreviatedStringToNumber(like_amount)),
-            parseInt(Math.round(dislikeNo))
+            AbbreviatedStringToNumber(like_amount),
+            parseInt(dislikeNo)
           );
           addBar(percentage_like);
-
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
 
           console
           .log("Putting on Archive API")
-          .log(dislikeNo)
           .catch((err) => console.error(err));
-        });
-        
       } else {
         const like_amount = getLikes();
         const disss = await fetch_from_repl(video_id);
-        const percentage_like = likePercentage(parseInt(AbbreviatedStringToNumber(like_amount)), parseInt(disss));
+        console.log(disss);
+        const percentage_like = likePercentage(AbbreviatedStringToNumber(like_amount), parseInt(disss));
+        console.log(like_amount)
+        console.log(percentage_like)
         addBar(percentage_like);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
@@ -62,7 +62,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       }
     }
 
-    function AbbreviatedStringToNumber(string){
+function AbbreviatedStringToNumber(string){
     // Create a function that will convet abbrivated string to number
     // for eg- "1k" to 1000
     // "1m" to 1000000
@@ -75,18 +75,45 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     const regex = /(\d+)([kmbt])/;
     // Check if the string matches the regex
     if(regex.test(string)){
-        // If it matches, get the first match
+        // Get the match
         const match = string.match(regex);
         // Get the number
-        const number = match[1];
+        const number = parseFloat(string.slice(0, -1))
+        console.log(match)
         // Get the abbrivated string
         const abbrivated = match[2];
-        // Return the number multiplied by the abbrivated string
+        // Return the number
         return number * abbrivatedToNumber(abbrivated);
     }
     // If the string doesn't match the regex, return the string as a number
     return Number(string);  // Convert the string to a number
 }
+function abbrivatedToNumber(abbrivated){
+    // Create a function that will convert abbrivated string to number
+    // for eg- "k" to 1000
+    // "m" to 1000000
+    // "b" to 1000000000
+
+    // Check if the abbrivated string is "k"
+    if(abbrivated === "k"){
+        // Return 1000
+        return 1000;
+    }
+    // Check if the abbrivated string is "m"
+    if(abbrivated === "m"){
+        // Return 1000000
+        return 1000000;
+    }
+    // Check if the abbrivated string is "b"
+    if(abbrivated === "b"){
+        // Return 1000000000
+        return 1000000000;
+    }
+    else{
+        // Return 1
+        return 1;
+    }
+  }
 
     function numberToAbbreviatedString(number) {
       let result = "";
@@ -148,7 +175,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       return parseInt((100 * likeCount) / (likeCount + dislikeCount))
     }
 
-    console.log(likePercentage(100,20))
 
     function addBar(likePercentage) {
       console.log(likePercentage)
