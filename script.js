@@ -41,7 +41,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
             parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
-          
+
           editDislikes(dislikeNo);
           await put_on_repl(video_id, parseInt(dislikeNo));
         });
@@ -118,23 +118,19 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     function addBar(likePercentage) {
-      // let progress = document.createElement("div");
-      // let parentNode = document.getElementById("menu-container");
-      // progress.setAttribute("class", "style-scope ytd-sentiment-bar-renderer");
-      // progress.setAttribute("id", "like-bar");
-
-      // parentNode.appendChild(progress);
-      //   const selector = document.querySelector(
-      //     "div#menu.style-scope.ytd-video-primary-info-renderer"
-      //   );
-
       const selector = document.getElementById("menu-container");
 
       const prgroess = document.getElementById("custom-progress");
 
-      const clipButton = document.querySelectorAll(
-        "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
-      );
+      let clipButton = document.querySelector('[aria-label="Clip"]');
+      let ThanksButton = document.querySelector('[aria-label="Thanks"]');
+      // const clipButton = document.querySelectorAll(
+      //   "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      // );
+
+      // const thanksButton = document.querySelectorAll(
+      //   "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      // );
 
       if (prgroess) {
         return;
@@ -158,11 +154,13 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       color.setAttribute("id", "color");
 
       if (clipButton) {
-        clipButton.forEach((data) => {
-          if (data.textContent === "Clip") {
-            progress.style.width = "32.5%";
-          }
-        });
+        progress.style.width = "32.5%";
+      } else if (ThanksButton) {
+        progress.style.width = "30.5%";
+      }
+
+      if (clipButton && ThanksButton) {
+        progress.style.width = "25.5%";
       }
 
       progress.appendChild(color);
