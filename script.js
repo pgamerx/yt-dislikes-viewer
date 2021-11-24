@@ -1,20 +1,38 @@
 // This is a highly modified script from the original one by aquelemiguel.
 // "use strict";
 /* Import all the functions */
+
+// Hello lovely Github Copilot, I hope you are fine
+// I know I shit on you a lot but please help me with one thing
+// I am exporting a function called fetchInfo in file /functions/fetchInfo.js
+// I want to import that function here 
+
+/* Get the runtime URL */
+const fetchInfo_raw = chrome.runtime.getURL("./functions/fetchInfo.js");
+const editDislikes_raw  = chrome.runtime.getURL("./functions/editDislikes.js");
+const fetch_from_repl_raw  = chrome.runtime.getURL("./functions/fetch_from_repl.js");
+const put_on_repl_raw  = chrome.runtime.getURL("./functions/put_on_repl.js");
+const bar_fns  = chrome.runtime.getURL("./functions/bar_fns.js");
+const numberToAbbreviatedString_raw = chrome.runtime.getURL("./functions/numberToAbbreviatedString.js");
+
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
-  (function () {
+  (async function () {
+
+    // Load the functions
+    const {fetchInfo} = await import(fetchInfo_raw);
+    const {editDislikes} = await import(editDislikes_raw);
+    const {fetch_from_repl} = await import(fetch_from_repl_raw);
+    const {put_on_repl} = await import(put_on_repl_raw);
+    const {addBar, likePercentage} = await import(bar_fns);
+    const {numberToAbbreviatedString} = await import(numberToAbbreviatedString_raw);
+
+
    const YT_API_KEY = savedApi;
     const BASE_ENDPOINT = "https://www.googleapis.com/youtube/v3";
 
+
     const video_id = new URLSearchParams(window.location.search).get("v");
     async function run() {
-      const { default: fetchInfo } = await import("./functions/fetchInfo.js");
-      const { default: editDislikes } = await import("./functions/editDislikes.js");
-      const { default: fetch_from_repl } = await import("./functions/fetch_from_repl.js");
-      const { default: put_on_repl } = await import("./functions/put_on_repl.js");
-      const { default: addBar, default: likePercentage } = await import("./functions/bar_fns.js");
-      const { default: numberToAbbreviatedString } = await import("./functions/numberToAbbreviatedString.js");
-      
       if (
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == "e"
