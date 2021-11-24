@@ -55,6 +55,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         });
         const percentage_like = likePercentage(parseInt(like_amount));
         addBar(percentage_like);
+        // const like_amount = getLikes();
+        // const percentage_like = likePercentage(parseInt(like_amount));
+        // addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
@@ -116,6 +119,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       } else {
         selector = selectorOldUi;
       }
+
       const dislikeLabel = document.querySelector(selector);
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
@@ -188,7 +192,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       }
     }
 
-    chrome.runtime.onMessage.addListener(function (
+    chrome.runtime.onMessage.addListener(function ( 
       request,
       sender,
       sendResponse
