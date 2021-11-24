@@ -207,7 +207,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       }
     }
 
-    chrome.runtime.onMessage.addListener(function (
+    chrome.runtime.onMessage.addListener(function ( 
       request,
       sender,
       sendResponse
