@@ -97,9 +97,20 @@ browser.storage.local.get("apiKey", ({ apiKey }) => {
         );
     }
     function editDislikes(dislikeNo) {
+      let selector;
       // Fetch the dislike label
-      const selector =
+      const selectorOldUi =
         "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(2) yt-formatted-string";
+      const selectorNewUi =
+        "ytd-menu-renderer.ytd-watch-metadata > div > :nth-child(2) yt-formatted-string";
+
+      const checkForNewUI = document.getElementById("description-and-actions");
+      if (checkForNewUI) {
+        selector = selectorNewUi;
+      } else {
+        selector = selectorOldUi;
+      }
+
       const dislikeLabel = document.querySelector(selector);
 
       // Update the label with the new dislike count
@@ -122,67 +133,72 @@ browser.storage.local.get("apiKey", ({ apiKey }) => {
     }
 
     function addBar(likePercentage) {
-      const selector = document.getElementById("menu-container");
+      const selectorOldUi = document.getElementById("menu-container");
+      const selectorNewUi = document.getElementById("actions-inner");
 
-      const prgroess = document.getElementById("custom-progress");
+      // checks for new youtube layout or old one
+      if (selectorOldUi || selectorNewUi) {
+        let selector;
+        if (selectorNewUi) {
+          selector = selectorNewUi;
+        } else {
+          selector = selectorOldUi;
+        }
+        const prgroess = document.getElementById("custom-progress");
 
-      let clipButton = document.querySelector('[aria-label="Clip"]');
-      let ThanksButton = document.querySelector('[aria-label="Thanks"]');
-      // const clipButton = document.querySelectorAll(
-      //   "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
-      // );
+        let clipButton = document.querySelector('[aria-label="Clip"]');
+        let ThanksButton = document.querySelector('[aria-label="Thanks"]');
 
-      // const thanksButton = document.querySelectorAll(
-      //   "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
-      // );
+        if (prgroess) {
+          return;
+        }
 
-      if (prgroess) {
-        return;
+        const progress = document.createElement("div");
+        const color = document.createElement("div");
+
+        progress.className = "progress";
+        progress.style.position = "relative";
+        progress.style.height = "3px";
+        progress.style.width = "40%";
+        progress.style.background = "gray";
+        progress.style.marginright = "20px";
+        progress.setAttribute("id", "custom-progress");
+        color.className = "color";
+        color.style.position = "absolute";
+        color.style.background = "white";
+        color.style.width = `${likePercentage}%`;
+        color.style.height = "3px";
+        color.setAttribute("id", "color");
+
+        if (clipButton) {
+          progress.style.width = "32.5%";
+        } else if (ThanksButton) {
+          progress.style.width = "30.5%";
+        }
+
+        if (clipButton && ThanksButton) {
+          progress.style.width = "25.5%";
+        }
+
+        progress.appendChild(color);
+
+        selector.appendChild(progress);
       }
 
-      const progress = document.createElement("div");
-      const color = document.createElement("div");
-
-      progress.className = "progress";
-      progress.style.position = "relative";
-      progress.style.height = "3px";
-      progress.style.width = "40%";
-      progress.style.background = "gray";
-      progress.style.marginright = "20px";
-      progress.setAttribute("id", "custom-progress");
-      color.className = "color";
-      color.style.position = "absolute";
-      color.style.background = "white";
-      color.style.width = `${likePercentage}%`;
-      color.style.height = "3px";
-      color.setAttribute("id", "color");
-
-      if (clipButton) {
-        progress.style.width = "32.5%";
-      } else if (ThanksButton) {
-        progress.style.width = "30.5%";
-      }
-
-      if (clipButton && ThanksButton) {
-        progress.style.width = "25.5%";
-      }
-
-      progress.appendChild(color);
-
-      selector.appendChild(progress);
+      chrome.runtime.onMessage.addListener(function (
+        request,
+        sender,
+        sendResponse
+      ) {
+        // listen for messages sent from background.js
+        if (request.message === "progressbar") {
+          let progressBar = document.querySelector(".progress");
+          progressBar.parentElement.removeChild(progressBar);
+          run();
+        }
+      });
     }
 
-    browser.runtime.onMessage.addListener(function (
-      request,
-      sender,
-      sendResponse
-    ) {
-      // listen for messages sent from background.js
-      if (request.message === "progressbar") {
-        let progressBar = document.querySelector(".progress");
-        progressBar.parentElement.removeChild(progressBar);
-      }
-    });
     run();
   })();
 });
