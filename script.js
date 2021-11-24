@@ -162,19 +162,19 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         const progress = document.createElement("div");
         const color = document.createElement("div");
 
-        // Fix for Edge seems like current color scheme conflicts with edge so this is a checker
+        // Fix for Dark youtube Mode and Light youtube mode
         let colorBackground;
         let progressBackround;
 
-        if (
-          navigator.appVersion.indexOf("Edg") > -1 ||
-          navigator.appVersion.indexOf("Edge") > -1
-        ) {
-          colorBackground = "black";
-          progressBackround = "grey";
-        } else {
+        let darkMode = document
+          .getElementsByTagName("html")[0]
+          .getAttribute("dark");
+        if (darkMode) {
           progressBackround = "grey";
           colorBackground = "white";
+        } else {
+          colorBackground = "black";
+          progressBackround = "grey";
         }
 
         progress.className = "progress";
@@ -207,7 +207,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       }
     }
 
-    chrome.runtime.onMessage.addListener(function ( 
+    chrome.runtime.onMessage.addListener(function (
       request,
       sender,
       sendResponse
