@@ -1,3 +1,4 @@
+/*
 // This is a modified script from the original one by aquelemiguel.
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
   (function () {
@@ -182,3 +183,4 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     run();
   })();
 });
+*/
