@@ -1,3 +1,4 @@
+"use strict";
 export function editDislikes(dislikeNo, numberToAbbreviatedString) {
     let selector;
 

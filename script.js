@@ -1,17 +1,15 @@
 // This is a highly modified script from the original one by aquelemiguel.
-
-/* Import all the functions */
-const {fetchInfo} = require('functions/fetchInfo.js');
-const {editDislikes} = require('functions/editDislikes.js');
-const {fetch_from_repl} = require('functions/fetch_from_repl.js');
-const {put_on_repl} = require('functions/put_on_repl.js');
-const {addBar, likePercentage} = require('functions/bar_fns.js');
-
-
-const {numberToAbbreviatedString} = require('functions/numberToAbbreviatedString.js');
-
+"use strict";
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
-  (function () {
+  (async function () {
+    /* Import all the functions */
+const { default: fetchInfo } = require('./functions/fetchInfo')
+const { default: editDislikes } = require('./functions/editDislikes.js')
+const { default: fetch_from_repl } = require('./functions/fetch_from_repl')
+const { default: put_on_repl } = require('./functions/put_on_repl')
+const { default: addBar, default: likePercentage } = require('./functions/bar_fns')
+const { default: numberToAbbreviatedString } = require('./functions/numberToAbbreviatedString')
+
     const YT_API_KEY = savedApi;
     const BASE_ENDPOINT = "https://www.googleapis.com/youtube/v3";
 
@@ -19,7 +17,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     async function run() {
       if (
         !(await fetch_from_repl(video_id)) ||
-        (await fetch_from_repl(video_id)) == 010101
+        (await fetch_from_repl(video_id)) == "e"
       ) {
         fetchInfo(BASE_ENDPOINT, YT_API_KEY,video_id).then(async (info) => {
           if (info) console.log(info);

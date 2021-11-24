@@ -1,3 +1,5 @@
+"use strict";
+
 export function likePercentage(likeCount, dislikeCount) {
     return (100 * likeCount) / (likeCount + dislikeCount);
   }

@@ -1,3 +1,4 @@
+"use strict";
 export async function fetchInfo(BASE_ENDPOINT, YT_API_KEY, videoId) {
     if (!videoId) {
       videoId = new URLSearchParams(window.location.search).get("v");

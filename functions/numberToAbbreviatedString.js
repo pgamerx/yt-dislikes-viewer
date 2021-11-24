@@ -1,3 +1,4 @@
+"use strict";
 export function numberToAbbreviatedString(number) {
     let result = "";
     let num = number;
