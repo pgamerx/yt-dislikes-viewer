@@ -50,6 +50,11 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
+        const like_amount = fetchInfo(video_id).then(async (info) => {
+          info.likes;
+        });
+        const percentage_like = likePercentage(parseInt(like_amount));
+        addBar(percentage_like);
         // const like_amount = getLikes();
         // const percentage_like = likePercentage(parseInt(like_amount));
         // addBar(percentage_like);
@@ -100,6 +105,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
     function editDislikes(dislikeNo) {
       let selector;
+
       // Fetch the dislike label
       // checks for new UI of youtube or Old one
       const selectorOldUi =
@@ -120,14 +126,14 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       dislikeLabel.textContent = formattedDislikes;
     }
 
-    function getLikes() {
-      const count = document
-        .querySelector(
-          "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
-        )
-        .ariaLabel.replace(/[^\d-]/g, "");
-      return parseInt(count);
-    }
+    // function getLikes() {
+    //   const count = document
+    //     .querySelector(
+    //       "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
+    //     )
+    //     .ariaLabel.replace(/[^\d-]/g, "");
+    //   return parseInt(count);
+    // }
 
     function likePercentage(likeCount, dislikeCount) {
       return (100 * likeCount) / (likeCount + dislikeCount);
@@ -184,57 +190,23 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
         selector.appendChild(progress);
       }
-
-      let clipButton = document.querySelector('[aria-label="Clip"]');
-      let ThanksButton = document.querySelector('[aria-label="Thanks"]');
-
-      if (prgroess) {
-        return;
-      }
-
-      const progress = document.createElement("div");
-      const color = document.createElement("div");
-
-      progress.className = "progress";
-      progress.style.position = "relative";
-      progress.style.height = "3px";
-      progress.style.width = "40%";
-      progress.style.background = "gray";
-      progress.style.marginright = "20px";
-      progress.setAttribute("id", "custom-progress");
-      color.className = "color";
-      color.style.position = "absolute";
-      color.style.background = "white";
-      color.style.width = `${likePercentage}%`;
-      color.style.height = "3px";
-      color.setAttribute("id", "color");
-
-      if (clipButton) {
-        progress.style.width = "32.5%";
-      } else if (ThanksButton) {
-        progress.style.width = "30.5%";
-      }
-
-      if (clipButton && ThanksButton) {
-        progress.style.width = "25.5%";
-      }
-
-      progress.appendChild(color);
-
-      selector.appendChild(progress);
     }
 
-    chrome.runtime.onMessage.addListener(function (
+    chrome.runtime.onMessage.addListener(function ( 
       request,
       sender,
       sendResponse
     ) {
       // listen for messages sent from background.js
       if (request.message === "progressbar") {
-        let progressBar = document.querySelector(".progress");
+        // let test = document.querySelector(
+        //   "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(2) yt-formatted-string"
+        // );
+        // test.parentNode.removeChild(test);
+        let progressBar = document.getElementById("custom-progress");
         progressBar.parentElement.removeChild(progressBar);
-        run();
       }
+      // run();
     });
     run();
   })();
