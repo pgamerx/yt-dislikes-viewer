@@ -13,15 +13,15 @@ That's why I am launching an archiving API that will allow anyone to see dislike
 
 # Installation 
 ## For Chromium-based Browsers (Edge,Chrome,Brave,Opera/OperaGX,Vivaldi etc.)
-* ### Through Chrome Web Store
-1. Head over to Google ChromeStore and navigate to [This extension](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee).
-2. Press Add to `[BROWSER]` button, `[BROWSER]` may be chrome, brave, edge, or etc.
-
 * ### Manually (Through Github Releases)
-1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) and unzip it.
+1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) (chromium.zip) and unzip it.
 2. Navigate to your browser's extensions page. It's `chrome://extensions` for Chrome and `edge://extensions` for Edge and **enable developer mode**.
 3. Click **Load Unpacked** and, select the unzipped folder.
 4. Once the extension is added to your browser, click the extension icon and enter your yt v3 Data API key (More info on the popup)
+
+* ### Through Chrome Web Store
+1. Head over to Google ChromeStore and navigate to [This extension](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee).
+2. Press Add to `[BROWSER]` button, `[BROWSER]` may be chrome, brave, edge, or etc.
 
 More reference on how to manually install extensions [here](https://developer.chrome.com/docs/extensions/mv3/getstarted/#manifest).
 
