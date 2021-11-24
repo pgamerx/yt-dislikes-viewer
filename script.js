@@ -192,9 +192,8 @@ browser.storage.local.get("apiKey", ({ apiKey }) => {
       ) {
         // listen for messages sent from background.js
         if (request.message === "progressbar") {
-          let progressBar = document.querySelector(".progress");
+          let progressBar = document.getElementById("custom-progress");
           progressBar.parentElement.removeChild(progressBar);
-          run();
         }
       });
     }
