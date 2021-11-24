@@ -10,6 +10,10 @@
     "default_popup": "popup/index.html",
     "default_title": "A popup will come"
   },
+  "web_accessible_resources": [{
+      "resources": ["/functions/*"],
+      "matches": ["<all_urls>"]
+    }],
   "permissions": ["scripting", "webNavigation", "storage"],
   "host_permissions": ["*://*.youtube.com/watch?*"],
   "icons": {

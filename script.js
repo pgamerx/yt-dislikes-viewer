@@ -7,16 +7,17 @@
 // I am exporting a function called fetchInfo in file /functions/fetchInfo.js
 // I want to import that function here 
 
-/* Get the runtime URL */
-const fetchInfo_raw = chrome.runtime.getURL("./functions/fetchInfo.js");
-const editDislikes_raw  = chrome.runtime.getURL("./functions/editDislikes.js");
-const fetch_from_repl_raw  = chrome.runtime.getURL("./functions/fetch_from_repl.js");
-const put_on_repl_raw  = chrome.runtime.getURL("./functions/put_on_repl.js");
-const bar_fns  = chrome.runtime.getURL("./functions/bar_fns.js");
-const numberToAbbreviatedString_raw = chrome.runtime.getURL("./functions/numberToAbbreviatedString.js");
 
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
   (async function () {
+
+    /* Get the runtime URL */
+    const fetchInfo_raw = chrome.runtime.getURL("./functions/fetchInfo.js");
+    const editDislikes_raw  = chrome.runtime.getURL("./functions/editDislikes.js");
+    const fetch_from_repl_raw  = chrome.runtime.getURL("./functions/fetch_from_repl.js");
+    const put_on_repl_raw  = chrome.runtime.getURL("./functions/put_on_repl.js");
+    const bar_fns  = chrome.runtime.getURL("./functions/bar_fns.js");
+    const numberToAbbreviatedString_raw = chrome.runtime.getURL("./functions/numberToAbbreviatedString.js");
 
     // Load the functions
     const {fetchInfo} = await import(fetchInfo_raw);
