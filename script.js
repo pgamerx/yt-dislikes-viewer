@@ -55,6 +55,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         });
         const percentage_like = likePercentage(parseInt(like_amount));
         addBar(percentage_like);
+        // const like_amount = getLikes();
+        // const percentage_like = likePercentage(parseInt(like_amount));
+        // addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
@@ -116,6 +119,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       } else {
         selector = selectorOldUi;
       }
+
       const dislikeLabel = document.querySelector(selector);
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
@@ -158,16 +162,31 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         const progress = document.createElement("div");
         const color = document.createElement("div");
 
+        // Fix for Edge seems like current color scheme conflicts with edge so this is a checker
+        let colorBackground;
+        let progressBackround;
+
+        if (
+          navigator.appVersion.indexOf("Edg") > -1 ||
+          navigator.appVersion.indexOf("Edge") > -1
+        ) {
+          colorBackground = "black";
+          progressBackround = "grey";
+        } else {
+          progressBackround = "grey";
+          colorBackground = "white";
+        }
+
         progress.className = "progress";
         progress.style.position = "relative";
         progress.style.height = "3px";
         progress.style.width = "40%";
-        progress.style.background = "gray";
+        progress.style.background = `${progressBackround}`;
         progress.style.marginright = "20px";
         progress.setAttribute("id", "custom-progress");
         color.className = "color";
         color.style.position = "absolute";
-        color.style.background = "white";
+        color.style.background = `${colorBackground}`;
         color.style.width = `${likePercentage}%`;
         color.style.height = "3px";
         color.setAttribute("id", "color");
