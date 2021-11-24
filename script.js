@@ -1,25 +1,25 @@
 // This is a highly modified script from the original one by aquelemiguel.
-"use strict";
+// "use strict";
+/* Import all the functions */
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
-  (async function () {
-    /* Import all the functions */
-const { default: fetchInfo } = require('./functions/fetchInfo')
-const { default: editDislikes } = require('./functions/editDislikes.js')
-const { default: fetch_from_repl } = require('./functions/fetch_from_repl')
-const { default: put_on_repl } = require('./functions/put_on_repl')
-const { default: addBar, default: likePercentage } = require('./functions/bar_fns')
-const { default: numberToAbbreviatedString } = require('./functions/numberToAbbreviatedString')
-
-    const YT_API_KEY = savedApi;
+  (function () {
+   const YT_API_KEY = savedApi;
     const BASE_ENDPOINT = "https://www.googleapis.com/youtube/v3";
 
     const video_id = new URLSearchParams(window.location.search).get("v");
     async function run() {
+      const { default: fetchInfo } = await import("./functions/fetchInfo.js");
+      const { default: editDislikes } = await import("./functions/editDislikes.js");
+      const { default: fetch_from_repl } = await import("./functions/fetch_from_repl.js");
+      const { default: put_on_repl } = await import("./functions/put_on_repl.js");
+      const { default: addBar, default: likePercentage } = await import("./functions/bar_fns.js");
+      const { default: numberToAbbreviatedString } = await import("./functions/numberToAbbreviatedString.js");
+      
       if (
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == "e"
       ) {
-        fetchInfo(BASE_ENDPOINT, YT_API_KEY,video_id).then(async (info) => {
+        fetchInfo(BASE_ENDPOINT, YT_API_KEY, video_id).then(async (info) => {
           if (info) console.log(info);
 
           const like_amount = info.likes;
@@ -59,7 +59,7 @@ const { default: numberToAbbreviatedString } = require('./functions/numberToAbbr
     //   return parseInt(count);
     // }
 
-    chrome.runtime.onMessage.addListener(function ( 
+    chrome.runtime.onMessage.addListener(function (
       request,
       sender,
       sendResponse
