@@ -13,7 +13,7 @@
   "permissions": ["scripting", "webNavigation", "storage"],
   "host_permissions": ["*://*.youtube.com/watch?*"],
   "icons": {
-    "16": "/poup/icons/get_started16.png",
+    "16": "/popup/icons/get_started16.png",
     "32": "/popup/icons/get_started32.png",
     "48": "/popup/icons/get_started48.png",
     "128": "/popup/icons/get_started128.png"
