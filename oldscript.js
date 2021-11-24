@@ -33,32 +33,32 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == 010101
       ) {
-        fetchInfo(video_id).then(async (info) => {
-          if (info) console.log(info);
-
-          const like_amount = info.likes;
+        fetchDislikes(video_id).then(async (dislikeNo) => {
+          if (dislikeNo) console.log(dislikeNo);
+          const like_amount = getLikes();
           const percentage_like = likePercentage(
             parseInt(like_amount),
-            parseInt(Math.round(info.dislikes))
+            parseInt(Math.round(dislikeNo))
           );
           addBar(percentage_like);
 
-          editDislikes(info.dislikes);
-          await put_on_repl(video_id, parseInt(info.dislikes));
+          editDislikes(dislikeNo);
+          await put_on_repl(video_id, parseInt(dislikeNo));
         });
         console
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
-        // const like_amount = getLikes();
-        // const percentage_like = likePercentage(parseInt(like_amount));
-        // addBar(percentage_like);
+        const like_amount = getLikes();
+        const percentage_like = likePercentage(parseInt(like_amount));
+        addBar(percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
         editDislikes(disss);
         console.log("Fetched from the archive API");
       }
     }
+
     function numberToAbbreviatedString(number) {
       let result = "";
       let num = number;
@@ -82,7 +82,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           : num.toFixed(1) + unit;
       return result;
     }
-    async function fetchInfo(videoId) {
+    async function fetchDislikes(videoId) {
       if (!videoId) {
         videoId = new URLSearchParams(window.location.search).get("v");
       }
@@ -90,31 +90,15 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
 
       return fetch(endpoint)
         .then((r) => r.json())
-        .then(
-          (r) =>
-            (values = {
-              dislikes: parseInt(r.items[0].statistics.dislikeCount),
-              likes: parseInt(r.items[0].statistics.likeCount),
-            })
-        );
+        .then((r) => parseInt(r.items[0].statistics.dislikeCount));
     }
+
     function editDislikes(dislikeNo) {
-      let selector;
       // Fetch the dislike label
-      // checks for new UI of youtube or Old one
-      const selectorOldUi =
+      const selector =
         "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(2) yt-formatted-string";
-      const selectorNewUi =
-        "ytd-menu-renderer.ytd-watch-metadata > div > :nth-child(2) yt-formatted-string";
-
-      const checkForNewUI = document.getElementById("description-and-actions");
-      if (checkForNewUI) {
-        selector = selectorNewUi;
-      } else {
-        selector = selectorOldUi;
-      }
-
       const dislikeLabel = document.querySelector(selector);
+
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
       dislikeLabel.textContent = formattedDislikes;
@@ -134,59 +118,19 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
 
     function addBar(likePercentage) {
-      // checks for new UI of youtube or Old
-      const selectorOldUi = document.getElementById("menu-container");
-      const selectorNewUi = document.getElementById("actions-inner");
+      const selector = document.getElementById("menu-container");
 
-      if (selectorOldUi || selectorNewUi) {
-        let selector;
-        if (selectorNewUi) {
-          selector = selectorNewUi;
-        } else {
-          selector = selectorOldUi;
-        }
-        const prgroess = document.getElementById("custom-progress");
-
-        let clipButton = document.querySelector('[aria-label="Clip"]');
-        let ThanksButton = document.querySelector('[aria-label="Thanks"]');
-
-        if (prgroess) {
-          return;
-        }
-        const progress = document.createElement("div");
-        const color = document.createElement("div");
-
-        progress.className = "progress";
-        progress.style.position = "relative";
-        progress.style.height = "3px";
-        progress.style.width = "40%";
-        progress.style.background = "gray";
-        progress.style.marginright = "20px";
-        progress.setAttribute("id", "custom-progress");
-        color.className = "color";
-        color.style.position = "absolute";
-        color.style.background = "white";
-        color.style.width = `${likePercentage}%`;
-        color.style.height = "3px";
-        color.setAttribute("id", "color");
-
-        if (clipButton) {
-          progress.style.width = "32.5%";
-        } else if (ThanksButton) {
-          progress.style.width = "30.5%";
-        }
-
-        if (clipButton && ThanksButton) {
-          progress.style.width = "25.5%";
-        }
-
-        progress.appendChild(color);
-
-        selector.appendChild(progress);
-      }
+      const prgroess = document.getElementById("custom-progress");
 
       let clipButton = document.querySelector('[aria-label="Clip"]');
       let ThanksButton = document.querySelector('[aria-label="Thanks"]');
+      // const clipButton = document.querySelectorAll(
+      //   "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      // );
+
+      // const thanksButton = document.querySelectorAll(
+      //   "yt-formatted-string#text.style-scope.ytd-button-renderer.style-default.size-default"
+      // );
 
       if (prgroess) {
         return;
@@ -233,7 +177,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       if (request.message === "progressbar") {
         let progressBar = document.querySelector(".progress");
         progressBar.parentElement.removeChild(progressBar);
-        run();
       }
     });
     run();
