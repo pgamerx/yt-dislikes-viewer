@@ -1,4 +1,4 @@
-# Yt-Dislikes-Viewer
+# YT-Dislikes-Viewer
 A browser extension that allows you to see dislikes on a youtube video after the youtube update
 
 
