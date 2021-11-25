@@ -105,7 +105,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
     function editDislikes(dislikeNo) {
       let selector;
-
       // Fetch the dislike label
       // checks for new UI of youtube or Old one
       const selectorOldUi =
