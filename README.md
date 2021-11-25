@@ -32,4 +32,4 @@ More reference on how to manually install extensions [here](https://developer.ch
 * ### Manually (Through Github Releases)
 This is not recommended as it's much difficult to add a extension manually to Mozilla Firefox, however assuming you do choose to do it then the steps are similar to that of a Chronium-Based Browser.
 ## Contribution
-I cannot manage this extension on my own, that's why I need your support to keep it up to mark with the latest youtube updates. Feel free to star/fork this repo and work on it
+I can't deal with this extension all alone, that is the reason I really want your help to keep it up to stamp with the most recent youtube updates. Feel free and star/fork this repo and work on it!
