@@ -162,16 +162,31 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         const progress = document.createElement("div");
         const color = document.createElement("div");
 
+        // Fix for Dark youtube Mode and Light youtube mode
+        let colorBackground;
+        let progressBackround;
+
+        let darkMode = document
+          .getElementsByTagName("html")[0]
+          .getAttribute("dark");
+        if (darkMode) {
+          progressBackround = "grey";
+          colorBackground = "white";
+        } else {
+          colorBackground = "black";
+          progressBackround = "grey";
+        }
+
         progress.className = "progress";
         progress.style.position = "relative";
         progress.style.height = "3px";
         progress.style.width = "40%";
-        progress.style.background = "gray";
+        progress.style.background = `${progressBackround}`;
         progress.style.marginright = "20px";
         progress.setAttribute("id", "custom-progress");
         color.className = "color";
         color.style.position = "absolute";
-        color.style.background = "white";
+        color.style.background = `${colorBackground}`;
         color.style.width = `${likePercentage}%`;
         color.style.height = "3px";
         color.setAttribute("id", "color");
@@ -192,7 +207,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       }
     }
 
-    chrome.runtime.onMessage.addListener(function ( 
+    chrome.runtime.onMessage.addListener(function (
       request,
       sender,
       sendResponse
