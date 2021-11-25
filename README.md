@@ -14,22 +14,22 @@ Hello, I have quite recently checked the YouTube's official change-logs and it a
 ## For Chromium-based Browsers (Edge,Chrome,Brave,Opera/OperaGX,Vivaldi etc.)
 * ### Manually (Through Github Releases)
 1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) (chromium.zip) and unzip it.
-2. Navigate to your browser's extensions page. It's `chrome://extensions` for Chrome and `edge://extensions` for Edge and **enable developer mode**.
+2. Navigate to your browser's extensions page. It's `chrome://extensions` for Chrome and `edge://extensions` for Microsoft Edge and **enable developer mode**.
 3. Click **Load Unpacked** and, select the unzipped folder.
-4. Once the extension is added to your browser, click the extension icon and enter your yt v3 Data API key (More info on the popup)
+4. Once the extension is added to your browser, click the extension icon and enter your YouTube v3 Data API key (More info on the popup)
 
 * ### Through Chrome Web Store
-1. Head over to Google ChromeStore and navigate to [This extension](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee).
+1. Head over to Google ChromeStore and navigate to [this extension](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee).
 2. Press Add to `[BROWSER]` button, `[BROWSER]` may be chrome, brave, edge, or etc.
 
 More reference on how to manually install extensions [here](https://developer.chrome.com/docs/extensions/mv3/getstarted/#manifest).
 
 ## For FireFox
 * ### Through Mozilla Addon Store
-1. Head over to Mozilla Add-on Store and navigate to [This extension](https://addons.mozilla.org/addon/yt-dislikes-viewer/).
+1. Head over to Mozilla Add-on Store and navigate to [this extension](https://addons.mozilla.org/addon/yt-dislikes-viewer/).
 2. Install it by clicking "Add Add-on" button.
 
 * ### Manually (Through Github Releases)
-This is not recommended as it's much difficult to add a extension manually to Mozilla Firefox, but if you do decide to do it then the steps are similar to that of Chromium-based browser
+This is not recommended as it's much difficult to add a extension manually to Mozilla Firefox, however assuming you do choose to do it then the steps are similar to that of a Chronium-Based Browser.
 ## Contribution
 I cannot manage this extension on my own, that's why I need your support to keep it up to mark with the latest youtube updates. Feel free to star/fork this repo and work on it
