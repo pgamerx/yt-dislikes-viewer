@@ -8,8 +8,7 @@ A browser extension that allows you to see dislikes on a youtube video after the
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ekabjflbgeakdkhdneeakapgboleidee?color=red&label=ChromeStore%20Release&logo=google&logoColor=red&style=for-the-badge)](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee)
 
 # Important
-Hey there, I have just checked the Youtube's official change-logs and it seems that they will stop providing dislikes in the youtube Data API.
-That's why I am launching an archiving API that will allow anyone to see dislikes of any videos. This package will keep logging number of dislikes of any video and feed it to the API. In future, we will do something even better!
+Hello, I have quite recently checked the YouTube's official change-logs and it appears to be that they will avoid giving dislikes in the YouTube Data API. That is the reason I am dispatching an archiving API that will permit anybody to see dislikes of any videos. This package will continue to log number of dislikes of any video and feed it to the API. In future, we will improve!
 
 # Installation 
 ## For Chromium-based Browsers (Edge,Chrome,Brave,Opera/OperaGX,Vivaldi etc.)
