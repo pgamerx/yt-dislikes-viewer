@@ -1,11 +1,10 @@
 # YT-Dislikes-Viewer
 A browser extension that allows you to see dislikes on a youtube video after the youtube update
 
-
-[![Discord](https://img.shields.io/discord/690557545965813770?color=blue&label=Discord%20Server&logo=Discord&logoColor=white&style=for-the-badge)](https://u.pgamerx.com/discord) 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/pgamerx/yt-dislikes-viewer?color=red&label=Chromium%20Release&logo=google&logoColor=red&style=for-the-badge)](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest)
-[![Mozilla Add-on](https://img.shields.io/amo/v/yt-dislikes-viewer?color=orange&label=Mozilla%20Release&logo=firefox&style=for-the-badge)](https://addons.mozilla.org/addon/yt-dislikes-viewer/)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ekabjflbgeakdkhdneeakapgboleidee?color=red&label=ChromeStore%20Release&logo=google&logoColor=red&style=for-the-badge)](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee)
+[![GitHub all releases](https://img.shields.io/github/downloads/pgamerx/yt-dislikes-viewer/total?color=white&label=Github%20Downloads&logo=github&style=flat-square)](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/ekabjflbgeakdkhdneeakapgboleidee?color=red&label=ChromeStore%20Users&logo=google&logoColor=red&style=flat-square)](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee)
+[![Mozilla Add-on](https://img.shields.io/amo/dw/yt-dislikes-viewer?color=orange&label=FireFox%20Downloads&logo=firefox&logoColor=orange&style=flat-square)](https://addons.mozilla.org/addon/yt-dislikes-viewer)
+[![Discord](https://img.shields.io/discord/690557545965813770?color=blue&label=Discord%20Server&logo=Discord&logoColor=white&style=flat-square)](https://u.pgamerx.com/discord) 
 
 # Important
 Hello, I have quite recently checked the YouTube's official change-logs and it appears to be that they will avoid giving dislikes in the YouTube Data API. That is the reason I am dispatching an archiving API that will permit anybody to see dislikes of any videos. This package will continue to log number of dislikes of any video and feed it to the API. In future, we will improve!
