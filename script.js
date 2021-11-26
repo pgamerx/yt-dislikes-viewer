@@ -36,12 +36,11 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         fetchInfo(video_id).then(async (info) => {
           if (info) console.log(info);
 
-          const like_amount = info.likes;
           const percentage_like = likePercentage(
-            parseInt(like_amount),
-            parseInt(Math.round(info.dislikes))
+            parseInt(info.likes),
+            parseInt(info.dislikes)
           );
-          addBar(percentage_like);
+          addBar(parseInt(info.likes),parseInt(info.dislikes) ,percentage_like);
 
           editDislikes(info.dislikes);
           await put_on_repl(video_id, parseInt(info.dislikes));
@@ -50,17 +49,17 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
-        const like_amount = fetchInfo(video_id).then(async (info) => {
-          info.likes;
+        const likes = fetchInfo(video_id).then(async (info) => {
+          info.likes
         });
-        const percentage_like = likePercentage(parseInt(like_amount));
-        addBar(percentage_like);
-        // const like_amount = getLikes();
-        // const percentage_like = likePercentage(parseInt(like_amount));
-        // addBar(percentage_like);
-        const disss = await fetch_from_repl(video_id);
-        console.log(disss + " " + " disss ");
-        editDislikes(disss);
+        const dislikes = await fetch_from_repl(video_id);
+        const percentage_like = likePercentage(
+          parseInt(likes),
+          parseInt(dislikes)
+        );
+        addBar(parseInt(likes),parseInt(dislikes) ,percentage_like);
+        console.log(dislikes + " " + " dislikes ");
+        editDislikes(dislikes);
         console.log("Fetched from the archive API");
       }
     }
@@ -138,6 +137,46 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       return (100 * likeCount) / (likeCount + dislikeCount);
     }
 
+    function addBar(likes,dislikes,likesPercentage) {
+      var rateBar = document.getElementById(
+        "yt-dislikes-viewer-bar-container"
+      );
+      if(!rateBar){
+        document.getElementById("menu-container").insertAdjacentHTML(
+          "beforeend",
+          `
+            <div class="yt-dv-tooltip" style="width: 40px; marginRight: 20px" >
+            <div class="yt-dv-tooltip-bar-container">
+               <div
+                  id="yt-dislikes-viewer-bar-container"
+                  style="width: 100%; height: 2px;"
+                  >
+                  <div
+                     id="yt-dislikes-viewer-bar"
+                     style="width: ${likesPercentage}%; height: 100%"
+                     ></div>
+               </div>
+            </div>
+            <tp-yt-paper-tooltip position="top" id="yt-dv-dislike-tooltip" class="style-scope yt-dv-sentiment-bar-renderer" role="tooltip" tabindex="-1">
+               <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
+            </tp-yt-paper-tooltip>
+            </div>
+    `
+        );
+      }else{
+        document.getElementById(
+          "yt-dislikes-viewer-bar-container"
+        ).style.width = 40 + "px";
+        document.getElementById("yt-dislikes-viewer-bar").style.width =
+          likePercentage + "%";
+  
+        document.querySelector(
+          "#yt-dv-dislike-tooltip > #tooltip"
+        ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      }
+    }
+
+    /*
     function addBar(likePercentage) {
       // checks for new UI of youtube or Old
       const selectorOldUi = document.getElementById("menu-container");
@@ -205,7 +244,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         selector.appendChild(progress);
       }
     }
-
+*/
     chrome.runtime.onMessage.addListener(function (
       request,
       sender,
