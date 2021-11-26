@@ -33,33 +33,25 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == 010101
       ) {
-        fetchInfo(video_id).then(async (info) => {
-          if (info) console.log(info);
-
+        const info = await fetchInfo(video_id)
           const percentage_like = likePercentage(
             parseInt(info.likes),
             parseInt(info.dislikes)
           );
-          addBar(parseInt(info.likes),parseInt(info.dislikes) ,percentage_like);
+          addBar(info.likes, info.dislikes,percentage_like);
 
           editDislikes(info.dislikes);
           await put_on_repl(video_id, parseInt(info.dislikes));
-        });
         console
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
-        const likes = fetchInfo(video_id).then(async (info) => {
-          info.likes
-        });
-        const dislikes = await fetch_from_repl(video_id);
-        const percentage_like = likePercentage(
-          parseInt(likes),
-          parseInt(dislikes)
-        );
-        addBar(parseInt(likes),parseInt(dislikes) ,percentage_like);
-        console.log(dislikes + " " + " dislikes ");
-        editDislikes(dislikes);
+        const info = await fetchInfo(video_id)
+        const percentage_like = likePercentage(parseInt(info.likes), parseInt(info.dislikes));
+        addBar(info.likes, info.dislikes, percentage_like);
+        const disss = await fetch_from_repl(video_id);
+        console.log(disss + " " + " disss ");
+        editDislikes(disss);
         console.log("Fetched from the archive API");
       }
     }
@@ -104,6 +96,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     }
     function editDislikes(dislikeNo) {
       let selector;
+
       // Fetch the dislike label
       // checks for new UI of youtube or Old one
       const selectorOldUi =
@@ -124,60 +117,11 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       dislikeLabel.textContent = formattedDislikes;
     }
 
-    // function getLikes() {
-    //   const count = document
-    //     .querySelector(
-    //       "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
-    //     )
-    //     .ariaLabel.replace(/[^\d-]/g, "");
-    //   return parseInt(count);
-    // }
-
     function likePercentage(likeCount, dislikeCount) {
       return (100 * likeCount) / (likeCount + dislikeCount);
     }
 
-    function addBar(likes,dislikes,likesPercentage) {
-      var rateBar = document.getElementById(
-        "yt-dislikes-viewer-bar-container"
-      );
-      if(!rateBar){
-        document.getElementById("menu-container").insertAdjacentHTML(
-          "beforeend",
-          `
-            <div class="yt-dv-tooltip" style="width: 40px; marginRight: 20px" >
-            <div class="yt-dv-tooltip-bar-container">
-               <div
-                  id="yt-dislikes-viewer-bar-container"
-                  style="width: 100%; height: 2px;"
-                  >
-                  <div
-                     id="yt-dislikes-viewer-bar"
-                     style="width: ${likesPercentage}%; height: 100%"
-                     ></div>
-               </div>
-            </div>
-            <tp-yt-paper-tooltip position="top" id="yt-dv-dislike-tooltip" class="style-scope yt-dv-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-               <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
-            </tp-yt-paper-tooltip>
-            </div>
-    `
-        );
-      }else{
-        document.getElementById(
-          "yt-dislikes-viewer-bar-container"
-        ).style.width = 40 + "px";
-        document.getElementById("yt-dislikes-viewer-bar").style.width =
-          likePercentage + "%";
-  
-        document.querySelector(
-          "#yt-dv-dislike-tooltip > #tooltip"
-        ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
-      }
-    }
-
-    /*
-    function addBar(likePercentage) {
+    function addBar(likes,dislikes,likePercentage) {
       // checks for new UI of youtube or Old
       const selectorOldUi = document.getElementById("menu-container");
       const selectorNewUi = document.getElementById("actions-inner");
@@ -198,9 +142,8 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           return;
         }
         const progress = document.createElement("div");
+        const tooltip = document.createElement("div");
         const color = document.createElement("div");
-
-        // Fix for Dark youtube Mode and Light youtube mode
         let colorBackground;
         let progressBackround;
 
@@ -222,12 +165,28 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         progress.style.background = `${progressBackround}`;
         progress.style.marginright = "20px";
         progress.setAttribute("id", "custom-progress");
+        progress.style.marginTop = "3px";
         color.className = "color";
         color.style.position = "absolute";
         color.style.background = `${colorBackground}`;
         color.style.width = `${likePercentage}%`;
         color.style.height = "3px";
         color.setAttribute("id", "color");
+
+        progress.addEventListener("mouseover", async () => {
+          tooltip.innerHTML = `
+  <!--<tp-yt-paper-tooltip position="top" class="" role="tooltip" tabindex="-1" style="left: 25.6833px; bottom: -64px;"><!--css-build:shady-->
+  <div id="tooltip" class="style-scope tp-yt-paper-tooltip visible" style="background:#616161; max-width:110px;">
+  ${likes} / ${dislikes}
+</div>
+</tp-yt-paper-tooltip>
+          `;
+
+          selector.appendChild(tooltip);
+        });
+        progress.addEventListener("mouseout", () => {
+          tooltip.parentNode.removeChild(tooltip);
+        });
 
         if (clipButton) {
           progress.style.width = "32.5%";
@@ -244,7 +203,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         selector.appendChild(progress);
       }
     }
-*/
+
     chrome.runtime.onMessage.addListener(function (
       request,
       sender,
