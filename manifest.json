@@ -1,6 +1,6 @@
 {
   "name": "YT Dislikes viewer",
-  "description": "Show the dislike count on YouTube videos.",
+  "description": "Resurrect the youtube dislike count and give yourself the ability to customize your YouTube experience with 'The Youtube Dislikes Viewer' extension.",
   "version": "1.8.0",
   "manifest_version": 3,
   "background": {
