@@ -126,15 +126,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       dislikeLabel.textContent = formattedDislikes;
     }
 
-    // function getLikes() {
-    //   const count = document
-    //     .querySelector(
-    //       "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(1) yt-formatted-string"
-    //     )
-    //     .ariaLabel.replace(/[^\d-]/g, "");
-    //   return parseInt(count);
-    // }
-
     function likePercentage(likeCount, dislikeCount) {
       return (100 * likeCount) / (likeCount + dislikeCount);
     }
@@ -160,9 +151,8 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           return;
         }
         const progress = document.createElement("div");
+        const tooltip = document.createElement("div");
         const color = document.createElement("div");
-
-        // Fix for Dark youtube Mode and Light youtube mode
         let colorBackground;
         let progressBackround;
 
@@ -184,12 +174,31 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         progress.style.background = `${progressBackround}`;
         progress.style.marginright = "20px";
         progress.setAttribute("id", "custom-progress");
+        progress.style.marginTop = "3px";
         color.className = "color";
         color.style.position = "absolute";
         color.style.background = `${colorBackground}`;
         color.style.width = `${likePercentage}%`;
         color.style.height = "3px";
         color.setAttribute("id", "color");
+
+        progress.addEventListener("mouseover", async () => {
+          let videoId = new URLSearchParams(window.location.search).get("v");
+          let info = await fetchInfo(videoId);
+
+          tooltip.innerHTML = `
+  <!--<tp-yt-paper-tooltip position="top" class="" role="tooltip" tabindex="-1" style="left: 25.6833px; bottom: -64px;"><!--css-build:shady-->
+  <div id="tooltip" class="style-scope tp-yt-paper-tooltip visible" style="background:#616161; max-width:110px; Position:Absolute; Z-Index: 4">
+  ${info.likes} / ${info.dislikes}
+</div>
+</tp-yt-paper-tooltip>
+          `;
+
+          selector.appendChild(tooltip);
+        });
+        progress.addEventListener("mouseout", () => {
+          tooltip.parentNode.removeChild(tooltip);
+        });
 
         if (clipButton) {
           progress.style.width = "32.5%";
