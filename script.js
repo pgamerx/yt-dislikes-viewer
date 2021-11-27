@@ -1,5 +1,7 @@
 // This is a modified script from the original one by aquelemiguel.
 chrome.storage.sync.get("savedApi", ({ savedApi }) => {
+  chrome.storage.sync.get("primary", ({ primary }) => {
+    chrome.storage.sync.get("secondary", ({ secondary }) => {
   (function () {
     const YT_API_KEY = savedApi;
     const BASE_ENDPOINT = "https://www.googleapis.com/youtube/v3";
@@ -158,6 +160,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         let darkMode = document
           .getElementsByTagName("html")[0]
           .getAttribute("dark");
+
+          const reg = /^#[0-9A-F]{6}$/i;
+        if(!primary || !secondary || !reg.test(primary) || !reg.test(secondary)){ 
         if (darkMode) {
           progressBackround = "grey";
           colorBackground = "white";
@@ -165,7 +170,11 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           colorBackground = "black";
           progressBackround = "grey";
         }
-
+      }
+      else {
+        colorBackground = primary;
+        progressBackround = secondary;
+      }
         progress.className = "progress";
         progress.style.position = "relative";
         progress.style.height = "3px";
@@ -229,4 +238,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     });
     run();
   })();
+})
+});
 });

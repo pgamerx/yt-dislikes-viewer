@@ -49,7 +49,7 @@ function ratioBarCustomisation(e) {
     var status = document.getElementsByClassName("status2")[0];
     const reg = /^#[0-9A-F]{6}$/i;
     if(!reg.test(first) || !reg.test(second)) {
-      status.textContent = `${first} or ${second} is/are an invalid HexCode`;
+      status.textContent = `Invalid HexCode(s) were provided`;
       status.style.color = "#ff0000";
       setTimeout(() => {
         var status = document.getElementsByClassName("status")[0];
