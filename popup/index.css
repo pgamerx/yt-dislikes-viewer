@@ -1,4 +1,6 @@
 body {
+  height: 350px;
+  width: 350px;
   background-color: #0b0c1b;
   color: #fff;
   font: 500 1.5rem/1.75 "Inter", sans-serif;
@@ -6,6 +8,18 @@ body {
   text-align: center;
 }
 
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.inputBox{
+  padding-top: 6px;
+}
+
+#txt1{
+  line-height:24px;
+ }
 .logo {
   display: flex;
   align-items: center;
@@ -17,10 +31,14 @@ body {
 }
 
 .logoText {
-  font-size: 12px;
+  padding-right: 30px;
+  font-size: 20px;
 }
 
 .status {
+  padding-bottom: 5px;
+}
+.status2 {
   padding-bottom: 5px;
 }
 
@@ -41,6 +59,14 @@ body {
   box-sizing: border-box;
 }
 
+hr.solid {
+  border-top: 3px solid black;
+  color: #000;
+}
+
+.wptk:focus {
+  color: red;
+}
 .link {
   color: #fff;
   text-decoration: none;
@@ -71,14 +97,31 @@ body {
   border: none;
   color: #fff;
   text-decoration: none;
-  background: #2d8acc;
+  background: red;
   border-radius: 4px;
-  padding: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  transition-duration: 0.3s;
+}
+.save2 {
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  background: red;
+  border-radius: 4px;
+  padding: 10px;
   margin-bottom: 20px;
   margin-top: 10px;
   transition-duration: 0.3s;
 }
 
+.save2:hover,
+.save2:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
 .save:hover,
 .save:focus {
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);

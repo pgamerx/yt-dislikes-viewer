@@ -1,18 +1,22 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <script src="index.js" defer></script>
-  <link rel="stylesheet" href="index.css">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
-  <div class="logo">
+  <head>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="index.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="./utilz//materialize.css" />
+    <script type="text/javascript" src="./utilz/jquery.js"></script>
+    <script src="./utilz/materialize.js"></script>
+  </head>
+  <body>
+    <!-- <div class="logo">
     <img title="logo" class="logoImg" src="/icons/get_started32.png"/>
     <span class="logoText">YT Dislikes Viewer</span>
   </div>
@@ -21,7 +25,7 @@
     Insert API Key
   </h1>
   </br>
-  <input placeholder="Api Key" type="text" class="wptk" />
+  <input placeholder="Api Key" type="text" class="center-align wptk" />
   <button class="save">Save</button>
   <div class="status"></div>
   <div class="link-wrap">
@@ -29,6 +33,82 @@
     <a class="discord link" href="https://u.pgamerx.com/discord" target="_blank">Discord Server</a>
     <a class="donate link" href="https://ko-fi.com/pgamerx" target="_blank">Donate</a>    
   </div>
-  
-</body>
+   -->
+    <section class="container">
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs" style="background-color: #0b0c1b">
+            <!-- <li class="tab col s3"><a href="#Home">Test 1</a></li> -->
+            <li class="tab col s3">
+              <a class="active" href="#Home">Home</a>
+            </li>
+
+            <li class="tab col s3"><a href="#Custom">Custom</a></li>
+          </ul>
+        </div>
+        <div id="Home" class="col s12">
+
+
+          <div id="Home" class="col s12">
+            <div class="section center-align">
+              <div class="logo ">
+                <img title="logo" class="logoImg" src="/icons/get_started32.png"/>
+                <span class="logoText" class="">YT Dislikes Viewer</span>
+              </div>
+      <div class="divider red accent-1"></div>     
+              <div class="section">
+                    </br>
+                <h2 class="Header">
+                  Your API Key
+                </h2>
+                </br>
+          <div class="input-field col s12">
+          <i class="material-icons prefix inputBox">key</i>
+          <input id="txt1 icon_key" placeholder="YouTube's Data v3 Key" type="text" class="center-align wptk">
+          <label for="icon_key">API key</label>
+        </div>
+          <button class="save btn waves-effect red" type="submit" name="action">Save Changes
+    <i class="material-icons right">send</i>
+  </button>
+                <div class="status"></div>
+              </div>
+             
+              <div class="link-wrap">
+                <a class="waves-effect red btn" href="https://blog.hubspot.com/website/how-to-get-youtube-api-key" target="_blank"><i class="material-icons left">help</i>How To Get API Key</a>
+                <a class="waves-effect red btn" href="https://u.pgamerx.com/discord" target="_blank"><i class="material-icons left">chat</i>Support (DISCORD)</a>
+                <a class="waves-effect red btn" href="https://opencollective.com/yt-dislikes-viewer" target="_blank"><i class="material-icons left">attach_money
+</i>Become a sponsor</a>
+              </div>
+          </div>
+        </div>
+        </div>
+        <div id="Custom" class="col s12">
+        <div class="section center-align">
+        <div class="logo ">
+         <img title="logo" class="logoImg" src="/icons/gear.png"/>
+         <span class="logoText" class="">Customization</span>
+         </div>
+         <div class="divider red accent-1"></div>     
+              <div class="section">
+                <h2 class="Header">
+                  Ratio Bar
+                </h2>
+                </br>
+         <div class="input-field col s6">
+          <i class="material-icons prefix">color_lens</i>
+          <input id="icon_prefix" placeholder="Eg: Blue" type="text" class="validate center-align primary"/>              
+          <label for="icon_prefix">Like Color</label>
+        </div>
+                 <div class="input-field col s6">
+          <i class="material-icons prefix">color_lens</i>
+          <input id="icon_prefix" placeholder="Eg: Red" type="text" class="validate center-align primary"/>              
+
+          <label for="icon_prefix">Dislike Color</label>
+        </div> <button class="save2">Save</button>
+                <div class="status2">HexCode only.</div>
+              </div>
+         </div>
+      </div>
+    </section>
+  </body>
 </html>
