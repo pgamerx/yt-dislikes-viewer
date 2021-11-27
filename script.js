@@ -119,7 +119,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
       formattedDislikes === "NaN"
         ? (dislikeLabel.textContent = "Disabled")
-        : (dislikeLabel.textContent = formattedDislikes);  
+        : (dislikeLabel.textContent = formattedDislikes);
     }
 
     function likePercentage(likeCount, dislikeCount) {
