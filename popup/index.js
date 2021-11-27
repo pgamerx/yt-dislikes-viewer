@@ -59,7 +59,7 @@ function ratioBarCustomisation(e) {
     }else{
     status.textContent = "Color options have been saved!";
     status.style.color = "#1eff00";
-    chrome.storage.local.set(
+    chrome.storage.sync.set(
       {
         primary: first,
         secondary: second,

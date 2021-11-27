@@ -227,10 +227,6 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     ) {
       // listen for messages sent from background.js
       if (request.message === "progressbar") {
-        // let test = document.querySelector(
-        //   "ytd-menu-renderer.ytd-video-primary-info-renderer > div > :nth-child(2) yt-formatted-string"
-        // );
-        // test.parentNode.removeChild(test);
         let progressBar = document.getElementById("custom-progress");
         progressBar.parentElement.removeChild(progressBar);
       }
