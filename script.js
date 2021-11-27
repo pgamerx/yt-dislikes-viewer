@@ -33,21 +33,24 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         !(await fetch_from_repl(video_id)) ||
         (await fetch_from_repl(video_id)) == 010101
       ) {
-        const info = await fetchInfo(video_id)
-          const percentage_like = likePercentage(
-            parseInt(info.likes),
-            parseInt(info.dislikes)
-          );
-          addBar(info.likes, info.dislikes,percentage_like);
+        const info = await fetchInfo(video_id);
+        const percentage_like = likePercentage(
+          parseInt(info.likes),
+          parseInt(info.dislikes)
+        );
+        addBar(info.likes, info.dislikes, percentage_like);
 
-          editDislikes(info.dislikes);
-          await put_on_repl(video_id, parseInt(info.dislikes));
+        editDislikes(info.dislikes);
+        await put_on_repl(video_id, parseInt(info.dislikes));
         console
           .log("Putting on Archive API")
           .catch((err) => console.error(err));
       } else {
-        const info = await fetchInfo(video_id)
-        const percentage_like = likePercentage(parseInt(info.likes), parseInt(info.dislikes));
+        const info = await fetchInfo(video_id);
+        const percentage_like = likePercentage(
+          parseInt(info.likes),
+          parseInt(info.dislikes)
+        );
         addBar(info.likes, info.dislikes, percentage_like);
         const disss = await fetch_from_repl(video_id);
         console.log(disss + " " + " disss ");
@@ -121,7 +124,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       return (100 * likeCount) / (likeCount + dislikeCount);
     }
 
-    function addBar(likes,dislikes,likePercentage) {
+    function addBar(likes, dislikes, likePercentage) {
       // checks for new UI of youtube or Old
       const selectorOldUi = document.getElementById("menu-container");
       const selectorNewUi = document.getElementById("actions-inner");
@@ -144,6 +147,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         const progress = document.createElement("div");
         const tooltip = document.createElement("div");
         const color = document.createElement("div");
+
+        // Fix for Dark youtube Mode and Light youtube mode
+
         let colorBackground;
         let progressBackround;
 
@@ -174,12 +180,14 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         color.setAttribute("id", "color");
 
         progress.addEventListener("mouseover", async () => {
+          let videoId = new URLSearchParams(window.location.search).get("v");
+          let info = await fetchInfo(videoId);
+
           tooltip.innerHTML = `
-  <!--<tp-yt-paper-tooltip position="top" class="" role="tooltip" tabindex="-1" style="left: 25.6833px; bottom: -64px;"><!--css-build:shady-->
-  <div id="tooltip" class="style-scope tp-yt-paper-tooltip visible" style="background:#616161; max-width:110px;">
-  ${likes} / ${dislikes}
-</div>
-</tp-yt-paper-tooltip>
+          <!--<tp-yt-paper-tooltip position="top" class="" role="tooltip" tabindex="-1" style="left: 25.6833px; bottom: -64px;"><!--css-build:shady-->
+          <div id="tooltip" class="style-scope tp-yt-paper-tooltip visible" style="background:#616161; max-width:110px; Position:Absolute; Z-Index: 4">
+          ${info.likes} / ${info.dislikes}
+        </tp-yt-paper-tooltip>
           `;
 
           selector.appendChild(tooltip);
