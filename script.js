@@ -117,7 +117,9 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
       const dislikeLabel = document.querySelector(selector);
       // Update the label with the new dislike count
       const formattedDislikes = numberToAbbreviatedString(dislikeNo);
-      dislikeLabel.textContent = formattedDislikes;
+      formattedDislikes === "NaN"
+        ? (dislikeLabel.textContent = "Disabled")
+        : (dislikeLabel.textContent = formattedDislikes);  
     }
 
     function likePercentage(likeCount, dislikeCount) {
@@ -179,10 +181,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         color.style.height = "3px";
         color.setAttribute("id", "color");
 
-        progress.addEventListener("mouseover", async () => {
-          let videoId = new URLSearchParams(window.location.search).get("v");
-          let info = await fetchInfo(videoId);
-
+        progress.addEventListener("mouseover", () => {
           tooltip.innerHTML = `
           <!--<tp-yt-paper-tooltip position="top" class="" role="tooltip" tabindex="-1" style="left: 25.6833px; bottom: -64px;"><!--css-build:shady-->
           <div id="tooltip" class="style-scope tp-yt-paper-tooltip visible" style="background:#616161; max-width:110px; Position:Absolute; Z-Index: 4">
