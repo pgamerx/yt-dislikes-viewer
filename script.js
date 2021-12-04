@@ -4,7 +4,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     chrome.storage.sync.get("secondary", ({ secondary }) => {
       (function () {
         const YT_API_KEY = savedApi;
-        const BASE_ENDPOINT = "https://www.googleapis.com/youtube/v3";
+        const BASE_ENDPOINT = "https://www.viper909.xyz/api/v1/getdata";
 
         const video_id = new URLSearchParams(window.location.search).get("v");
         async function fetch_from_repl(vid) {
@@ -87,15 +87,15 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
           if (!videoId) {
             videoId = new URLSearchParams(window.location.search).get("v");
           }
-          const endpoint = `${BASE_ENDPOINT}/videos?key=${YT_API_KEY}&id=${videoId}&part=statistics`;
+          const endpoint = `${BASE_ENDPOINT}/${videoId}`;
 
           return fetch(endpoint)
             .then((r) => r.json())
             .then(
               (r) =>
                 (values = {
-                  dislikes: parseInt(r.items[0].statistics.dislikeCount),
-                  likes: parseInt(r.items[0].statistics.likeCount),
+                  dislikes: parseInt(r.data.dislikes),
+                  likes: parseInt(r.data.likes),
                 })
             );
         }

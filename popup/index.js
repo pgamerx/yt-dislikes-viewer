@@ -70,27 +70,17 @@ function ratioBarCustomisation(e) {
 
         setTimeout(() => {
           var status = document.getElementsByClassName("status")[0];
-          status.textContent = "Options saved.";
-
-          setTimeout(() => {
-            var status = document.getElementsByClassName("status")[0];
-            status.textContent = "";
-          }, 5000);
-        }
-      );
-    }
+          status.textContent = "";
+        }, 5000);
+      }
+    );
+  }
+    
   }
   console.log(e);
 }
 
-(function () {
-  var el = document.querySelector(".tabs");
-  var instance = M.Tabs.init(el, {});
-})();
-
-document
-  .getElementsByClassName("save2")[0]
-  .addEventListener("click", ratioBarCustomisation);
+document.getElementsByClassName("save2")[0].addEventListener("click", ratioBarCustomisation);
 document
   .getElementsByClassName("save")[0]
   .addEventListener("click", save_options);
