@@ -48,23 +48,27 @@ function ratioBarCustomisation(e) {
   } else {
     var status = document.getElementsByClassName("status2")[0];
     const reg = /^#[0-9A-F]{6}$/i;
-    if (!reg.test(first) || !reg.test(second)) {
-      status.textContent = `${first} or ${second} is/are an invalid HexCode`;
+    if(!reg.test(first) || !reg.test(second)) {
+      status.textContent = `Invalid HexCode(s) were provided`;
       status.style.color = "#ff0000";
       setTimeout(() => {
         var status = document.getElementsByClassName("status")[0];
         status.textContent = "";
       }, 5000);
-      return;
-    } else {
-      status.textContent = "Color options have been saved!";
-      status.style.color = "#1eff00";
-      chrome.storage.local.set(
-        {
-          primary: first,
-          secondary: second,
-        },
-        function () {
+      return
+    }else{
+    status.textContent = "Color options have been saved!";
+    status.style.color = "#1eff00";
+    chrome.storage.sync.set(
+      {
+        primary: first,
+        secondary: second,
+      },
+      function () {
+        var status = document.getElementsByClassName("status")[0];
+        status.textContent = "Options saved.";
+
+        setTimeout(() => {
           var status = document.getElementsByClassName("status")[0];
           status.textContent = "Options saved.";
 
