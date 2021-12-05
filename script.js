@@ -4,7 +4,7 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
     chrome.storage.sync.get("secondary", ({ secondary }) => {
       (function () {
         const YT_API_KEY = savedApi;
-        const BASE_ENDPOINT = "https://www.viper909.xyz/api/v1/getdata";
+        const BASE_ENDPOINT = "https://youtubedislikeviewer.xyz/api/v1/getdata";
 
         const video_id = new URLSearchParams(window.location.search).get("v");
         async function fetch_from_repl(vid) {
