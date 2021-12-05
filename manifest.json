@@ -1,7 +1,7 @@
 {
   "name": "YT Dislikes viewer",
   "description": "Resurrect the youtube dislike count, give yourself the ability to enhance your YouTube experience with 'Youtube Dislikes Viewer'.",
-  "version": "1.8.0",
+  "version": "1.8.3",
   "manifest_version": 3,
   "background": {
     "service_worker": "service.js"
