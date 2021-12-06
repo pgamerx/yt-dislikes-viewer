@@ -1,9 +1,7 @@
 // This is a modified script from the original one by aquelemiguel.
-chrome.storage.sync.get("savedApi", ({ savedApi }) => {
   chrome.storage.sync.get("primary", ({ primary }) => {
     chrome.storage.sync.get("secondary", ({ secondary }) => {
       (function () {
-        const YT_API_KEY = savedApi;
         const BASE_ENDPOINT = "https://youtubedislikeviewer.xyz/api/v1/getdata";
 
         const video_id = new URLSearchParams(window.location.search).get("v");
@@ -241,5 +239,4 @@ chrome.storage.sync.get("savedApi", ({ savedApi }) => {
         run();
       })();
     });
-  });
 });
