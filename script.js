@@ -119,9 +119,13 @@
           const dislikeLabel = document.querySelector(selector);
           // Update the label with the new dislike count
           const formattedDislikes = numberToAbbreviatedString(dislikeNo);
-          formattedDislikes === "NaN"
-            ? (dislikeLabel.textContent = "Disabled")
-            : (dislikeLabel.textContent = formattedDislikes);
+          if (formattedDislikes === "NaN") {
+            run();
+            let progressBar = document.getElementById("custom-progress");
+            progressBar.parentElement.removeChild(progressBar);
+          } else if (formattedDislikes !== "NaN") {
+            dislikeLabel.textContent = formattedDislikes;
+          }
         }
 
         function likePercentage(likeCount, dislikeCount) {
