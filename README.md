@@ -1,10 +1,6 @@
-## Farewell
-
-![Screenshot 2021-12-14 at 9 16 38 PM](https://user-images.githubusercontent.com/71639879/146031363-52872d82-b664-4a32-9f5f-51168c78ffb3.png)
-
-
 # YT-Dislikes-Viewer
 A browser extension that allows you to see dislikes on a youtube video after the youtube update
+(We are back but currently in alpha version)
 
 [![GitHub all releases](https://img.shields.io/github/downloads/pgamerx/yt-dislikes-viewer/total?color=white&label=Github%20Downloads&logo=github&style=flat-square)](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/users/ekabjflbgeakdkhdneeakapgboleidee?color=red&label=ChromeStore%20Users&logo=google&logoColor=red&style=flat-square)](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee)
