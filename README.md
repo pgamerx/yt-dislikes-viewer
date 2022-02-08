@@ -8,19 +8,24 @@ A browser extension that allows you to see dislikes on a youtube video after the
 [![Discord](https://img.shields.io/discord/690557545965813770?color=blue&label=Discord%20Server&logo=Discord&logoColor=white&style=flat-square)](https://u.pgamerx.com/discord) 
 
 # Important
-Hello, I have quite recently checked the YouTube's official change-logs and it appears to be that they will avoid giving dislikes in the YouTube Data API. That is the reason I am dispatching an archiving API that will permit anybody to see dislikes of any videos. This package will continue to log number of dislikes of any video and feed it to the API. In future, we will improve!
+Hi there, this is an alpha version of the YT Dislike Viewer, It is still in development and may contain bugs.     
+If you want to help with the development, please join the discord server and report any bugs you find.      
+If you want to support the project, please consider donating to the Ko-fi page.        
+If you have any suggestions or ideas, please join the discord server and let us know.       
+     
+If you want to use a stable alternative to the YT Dislike Viewer, please consider using the "Return Youtube Dislike" extension.
 
 # Installation 
 ## For Chromium-based Browsers (Edge,Chrome,Brave,Opera/OperaGX,Vivaldi etc.)
+* ### Through Chrome Web Store
+1. Head over to Google ChromeStore and navigate to [this extension](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee).
+2. Press Add to `[BROWSER]` button, `[BROWSER]` may be chrome, brave, edge, or etc.
+
 * ### Manually (Through Github Releases)
 1. [Download the latest release](https://github.com/pgamerx/yt-dislikes-viewer/releases/latest) (chromium.zip) and unzip it.
 2. Navigate to your browser's extensions page. It's `chrome://extensions` for Chrome and `edge://extensions` for Microsoft Edge and **enable developer mode**.
 3. Click **Load Unpacked** and, select the unzipped folder.
 4. Once the extension is added to your browser, click the extension icon and enter your YouTube v3 Data API key (More info on the popup)
-
-* ### Through Chrome Web Store
-1. Head over to Google ChromeStore and navigate to [this extension](https://chrome.google.com/webstore/detail/yt-dislikes-viewer/ekabjflbgeakdkhdneeakapgboleidee).
-2. Press Add to `[BROWSER]` button, `[BROWSER]` may be chrome, brave, edge, or etc.
 
 More reference on how to manually install extensions [here](https://developer.chrome.com/docs/extensions/mv3/getstarted/#manifest).
 
