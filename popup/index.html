@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="index.js" defer></script>
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="./utilz/materialize.css" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="./utilz/bulma.min.css" />
+
+    
+
+    <!-- <script src="./utilz/materialize.js"></script> -->
+  </head>
+  <body>
+    <!-- <div class="logo">
+    <img title="logo" class="logoImg" src="/icons/get_started32.png"/>
+    <span class="logoText">YT Dislikes Viewer</span>
+  </div>
+
+  <h1 class="Header">
+    Insert API Key
+  </h1>
+  </br>
+  <input placeholder="Api Key" type="text" class="center-align wptk" />
+  <button class="save">Save</button>
+  <div class="status"></div>
+  <div class="link-wrap">
+    <a class="how link" href="https://blog.hubspot.com/website/how-to-get-youtube-api-key" target="_blank">How to get an API key?</a>
+    <a class="discord link" href="https://u.pgamerx.com/discord" target="_blank">Discord Server</a>
+    <a class="donate link" href="https://ko-fi.com/pgamerx" target="_blank">Donate</a>    
+  </div>
+   -->
+    <section class="container">
+      <div class="row">
+        <div class="col s12">
+          <ul class="tabs" style="background-color: #0b0c1b">
+            <!-- <li class="tab col s3"><a href="#Home">Test 1</a></li> -->
+            <li class="tab col s3">
+              <a class="active" href="#Home">Home</a>
+            </li>
+
+            <li class="tab col s3"><a href="#Custom">Customization</a></li>
+          </ul>
+        </div>
+        <div id="Home" class="col s12">
+
+
+          <div id="Home" class="col s12">
+            <div class="section center-align">
+              <div class="logo ">
+                <img title="logo" class="logoImg" src="/icons/get_started32.png"/>
+                <span class="logoText" class="">Youtube Dislike Viewer</span>
+              </div>
+      <div class="divider red accent-1"></div>  
+      <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Hi there, this is an alpha version of the YT Dislike Viewer. It is still in development and may contain bugs. 
+        If you want to help with the development, please join the discord server and report any bugs you find.
+        If you want to support the project, please consider donating to the Ko-fi page. 
+        If you have any suggestions or ideas, please join the discord server and let us know.
+
+        If you want to use a stable alternative to the YT Dislike Viewer, please consider using the "Return Youtube Dislike" extension.
+      </div>   
+      <div class="section">
+      </div>
+              <div class="link-wrap">
+                <a class="waves-effect red btn" href="https://u.pgamerx.com/discord" target="_blank"><i class="material-icons left">chat</i>Support (DISCORD)</a>
+                <a class="waves-effect red btn" href="https://ko-fi.com/pgamerx" target="_blank"><i class="material-icons left">attach_money
+</i>Donate (Ko-Fi)</a>
+              </div>
+          </div>
+        </div>
+        </div>
+        <div id="Custom" class="col s12">
+        <div class="section center-align">
+        <div class="logo ">
+         <img title="logo" class="logoImg" src="/icons/gear.png"/>
+         <span class="logoText" class="">Customization</span>
+         </div>
+         <div class="divider red accent-1"></div>     
+              <div class="section">
+                <h2 class="Header">
+                  Ratio Bar
+                </h2>
+                </br>
+         <div class="input-field col s6">
+          <i class="material-icons prefix">color_lens</i>
+          <input id="icon_prefix" placeholder="Eg: #FFFFFF" type="text" class="validate center-align primary color1"/>              
+          <label for="icon_prefix">Like Color</label>
+        </div>
+                 <div class="input-field col s6">
+          <i class="material-icons prefix">color_lens</i>
+          <input id="icon_prefix" placeholder="Eg: #808080" type="text" class="validate center-align primary color2"/>              
+
+          <label for="icon_prefix">Dislike Color</label>
+        </div> 
+                  <button class="save2 btn waves-effect red" type="submit" name="action">Save Changes
+    <i class="material-icons right">send</i>
+  </button>
+                <div class="status2"></div>
+              </div>
+         </div>
+      </div>
+    </section>
+  </body>
+</html>
