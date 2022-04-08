@@ -2,7 +2,7 @@
 chrome.storage.sync.get("primary", ({ primary }) => {
   chrome.storage.sync.get("secondary", ({ secondary }) => {
     (function () {
-      const BASE_ENDPOINT = "https://youtubedislikeviewer.xyz/api/v1/getdata";
+      const BASE_ENDPOINT = "https://returnyoutubedislikeapi.com/votes";
 
       const video_id = new URLSearchParams(window.location.search).get("v");
       async function run() {
@@ -43,15 +43,15 @@ chrome.storage.sync.get("primary", ({ primary }) => {
         if (!videoId) {
           videoId = new URLSearchParams(window.location.search).get("v");
         }
-        const endpoint = `${BASE_ENDPOINT}/${videoId}`;
+        const endpoint = `${BASE_ENDPOINT}?videoId=${videoId}`;
 
         return fetch(endpoint)
           .then((r) => r.json())
           .then(
             (r) =>
               (values = {
-                dislikes: parseInt(r.data.dislikes),
-                likes: parseInt(r.data.likes),
+                dislikes: parseInt(r.dislikes),
+                likes: parseInt(r.likes),
               })
           );
       }
